@@ -16,6 +16,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Search', term: 'Keyword Planner', tip: 'Google Keyword Planner is a free tool to discover new keywords and see their search volume.' },
       { iconName: 'Target', term: 'Search Intent', tip: 'Understanding user intent helps create relevant content that ranks higher.' },
     ],
+    imageUrl: 'https://placehold.co/400x250.png?text=SEO+Research',
   },
   {
     id: 'social-media-engagement-1',
@@ -28,6 +29,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Instagram', term: 'Reels', tip: 'Instagram Reels are short-form videos that can significantly boost visibility and engagement.' },
       { iconName: 'Users', term: 'Influencers', tip: 'Micro-influencers can be more cost-effective and have a highly engaged niche audience.' },
     ],
+    imageUrl: 'https://placehold.co/400x250.png?text=Instagram+Boost',
   },
   {
     id: 'email-marketing-list-building-1',
@@ -40,6 +42,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Magnet', term: 'Lead Magnets', tip: 'A lead magnet is a free resource offered in exchange for contact information.' },
       { iconName: 'MousePointerClick', term: 'CTAs', tip: 'A Call-To-Action prompts the user to take a specific action, like signing up for a newsletter.' },
     ],
+    imageUrl: 'https://placehold.co/400x250.png?text=Email+List',
   },
   {
     id: 'paid-ads-google-1',
@@ -48,6 +51,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     category: 'Paid Advertising',
     tags: ['google ads', 'ppc', 'paid search', 'advertising'],
     proTip: "Use negative keywords to prevent your ads from showing for irrelevant searches, saving budget and improving CTR.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Google+Ads',
   },
   {
     id: 'analytics-ga4-basics-1',
@@ -56,15 +60,16 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     category: 'Analytics',
     tags: ['ga4', 'google analytics', 'data', 'metrics', 'reporting'],
     proTip: "Create custom audiences in GA4 to retarget specific user segments or analyze their behavior more deeply.",
+    imageUrl: 'https://placehold.co/400x250.png?text=GA4+Metrics',
   },
-  // Add 15-20 more diverse cheat sheets
   {
     id: 'seo-onpage-1',
     title: 'On-Page SEO Checklist',
     content: "Optimize title tags, meta descriptions, header tags (H1-H6). Use keywords naturally in content. Optimize images with alt text. Ensure fast page load speed. Internal linking to relevant pages.",
     category: 'SEO',
     tags: ['seo', 'on-page', 'optimization', 'website'],
-    proTip: "Ensure your website is mobile-friendly, as Google uses mobile-first indexing."
+    proTip: "Ensure your website is mobile-friendly, as Google uses mobile-first indexing.",
+    imageUrl: 'https://placehold.co/400x250.png?text=On-Page+SEO',
   },
   {
     id: 'social-media-content-calendar-1',
@@ -72,7 +77,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Plan your social media posts in advance. Identify key themes and topics. Schedule posts for optimal times. Use tools like Buffer, Hootsuite, or Sprout Social. Mix content types (text, image, video).",
     category: 'Social Media',
     tags: ['social media', 'content strategy', 'planning', 'schedule'],
-    proTip: "Analyze your social media performance to understand what content resonates most with your audience and adjust your calendar accordingly."
+    proTip: "Analyze your social media performance to understand what content resonates most with your audience and adjust your calendar accordingly.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Social+Calendar',
   },
   {
     id: 'email-marketing-automation-1',
@@ -80,7 +86,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Set up welcome email series for new subscribers. Create abandoned cart recovery emails. Send birthday/anniversary emails. Nurture leads with drip campaigns based on their interests.",
     category: 'Email Marketing',
     tags: ['email', 'automation', 'workflows', 'drip campaign'],
-    proTip: "Personalize automated emails using subscriber data (name, purchase history) to increase engagement."
+    proTip: "Personalize automated emails using subscriber data (name, purchase history) to increase engagement.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Email+Automation',
   },
   {
     id: 'paid-ads-facebook-1',
@@ -88,7 +95,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Utilize Facebook's diverse targeting options: demographics, interests, behaviors. Create custom audiences from your website visitors or customer lists. Use lookalike audiences to find new potential customers.",
     category: 'Paid Advertising',
     tags: ['facebook ads', 'social ads', 'targeting', 'custom audience'],
-    proTip: "Regularly test different ad creatives and targeting parameters to optimize your Facebook Ad campaigns for better ROI."
+    proTip: "Regularly test different ad creatives and targeting parameters to optimize your Facebook Ad campaigns for better ROI.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Facebook+Ads',
   },
   {
     id: 'analytics-kpi-1',
@@ -96,7 +104,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Identify KPIs relevant to your business goals (e.g., conversion rate, customer acquisition cost, lifetime value). Track KPIs consistently. Use dashboards to visualize KPI trends. Regularly review KPIs to measure progress.",
     category: 'Analytics',
     tags: ['kpi', 'metrics', 'business goals', 'performance'],
-    proTip: "Don't just track KPIs; set realistic targets for them and develop strategies to achieve those targets."
+    proTip: "Don't just track KPIs; set realistic targets for them and develop strategies to achieve those targets.",
+    imageUrl: 'https://placehold.co/400x250.png?text=KPI+Tracking',
   },
   {
     id: 'seo-link-building-1',
@@ -104,7 +113,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Create high-quality, shareable content. Guest blog on authoritative sites in your niche. Broken link building. Reach out to influencers and webmasters for mentions. Monitor your backlink profile.",
     category: 'SEO',
     tags: ['seo', 'link building', 'backlinks', 'off-page'],
-    proTip: "Focus on acquiring high-quality, relevant links from reputable sources rather than a large quantity of low-quality links."
+    proTip: "Focus on acquiring high-quality, relevant links from reputable sources rather than a large quantity of low-quality links.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Link+Building',
   },
   {
     id: 'social-media-linkedin-1',
@@ -112,7 +122,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Optimize your LinkedIn company page. Share valuable industry insights and articles. Engage with relevant groups. Encourage employees to be brand advocates. Use LinkedIn Ads for targeted B2B campaigns.",
     category: 'Social Media',
     tags: ['linkedin', 'b2b', 'social media', 'professional networking'],
-    proTip: "Publish native articles on LinkedIn to establish thought leadership and reach a wider audience."
+    proTip: "Publish native articles on LinkedIn to establish thought leadership and reach a wider audience.",
+    imageUrl: 'https://placehold.co/400x250.png?text=LinkedIn+B2B',
   },
   {
     id: 'email-marketing-subject-lines-1',
@@ -120,7 +131,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Keep subject lines concise and clear. Use personalization. Create a sense of urgency or curiosity. A/B test different subject lines. Avoid spam trigger words. Use emojis sparingly and appropriately.",
     category: 'Email Marketing',
     tags: ['email', 'subject lines', 'open rates', 'engagement'],
-    proTip: "Analyze your email open rates for different subject line styles to understand what works best for your audience."
+    proTip: "Analyze your email open rates for different subject line styles to understand what works best for your audience.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Email+Subjects',
   },
   {
     id: 'paid-ads-budget-optimization-1',
@@ -128,7 +140,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Set clear budget caps for campaigns. Monitor ad performance closely (CTR, CPC, CPA). Allocate more budget to high-performing ads and campaigns. Pause or adjust underperforming ads. Use ad scheduling for optimal timing.",
     category: 'Paid Advertising',
     tags: ['ad spend', 'budget', 'roi', 'optimization', 'ppc'],
-    proTip: "Use automated bidding strategies offered by ad platforms but monitor them closely to ensure they align with your goals."
+    proTip: "Use automated bidding strategies offered by ad platforms but monitor them closely to ensure they align with your goals.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Ad+Budget',
   },
   {
     id: 'analytics-conversion-tracking-1',
@@ -136,7 +149,8 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     content: "Define what a conversion means for your business (e.g., sale, lead, sign-up). Implement tracking pixels/tags (e.g., Google Ads tag, Facebook Pixel). Test your conversion tracking setup thoroughly. Use UTM parameters for campaign tracking.",
     category: 'Analytics',
     tags: ['conversion tracking', 'pixels', 'tags', 'utm', 'goals'],
-    proTip: "Track micro-conversions (e.g., adding to cart, video views) to understand the user journey better, even if they don't complete a macro-conversion."
+    proTip: "Track micro-conversions (e.g., adding to cart, video views) to understand the user journey better, even if they don't complete a macro-conversion.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Conversion+Tracking',
   },
    {
     id: 'content-marketing-strategy-1',
@@ -149,6 +163,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Users', term: 'Target Audience', tip: 'Understanding your audience personas is crucial for creating relevant content.' },
       { iconName: 'CalendarDays', term: 'Editorial Calendar', tip: 'Helps in consistent content publishing and managing topics.' },
     ],
+    imageUrl: 'https://placehold.co/400x250.png?text=Content+Strategy',
   },
   {
     id: 'social-media-tiktok-1',
@@ -157,6 +172,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     category: 'Social Media',
     tags: ['tiktok', 'video marketing', 'short-form video', 'trends'],
     proTip: "Experiment with TikTok's built-in editing tools and effects to make your videos more visually appealing and engaging.",
+    imageUrl: 'https://placehold.co/400x250.png?text=TikTok+Guide',
   },
   {
     id: 'email-marketing-segmentation-1',
@@ -165,6 +181,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     category: 'Email Marketing',
     tags: ['email segmentation', 'personalization', 'targeting', 'dynamic content'],
     proTip: "Start with simple segmentation (e.g., new subscribers vs. loyal customers) and gradually implement more complex segments as you gather more data.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Email+Segments',
   },
   {
     id: 'paid-ads-retargeting-1',
@@ -173,6 +190,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     category: 'Paid Advertising',
     tags: ['retargeting', 'remarketing', 'ad creatives', 'conversion'],
     proTip: "Offer a special discount or incentive in your retargeting ads to encourage users to complete their purchase or desired action.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Retargeting+Ads',
   },
   {
     id: 'analytics-funnel-analysis-1',
@@ -181,5 +199,6 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
     category: 'Analytics',
     tags: ['sales funnel', 'customer journey', 'conversion optimization', 'bottleneck'],
     proTip: "Use GA4's funnel exploration reports to visualize and analyze user progression through defined steps on your website.",
+    imageUrl: 'https://placehold.co/400x250.png?text=Funnel+Analysis',
   }
 ];

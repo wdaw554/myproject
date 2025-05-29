@@ -18,6 +18,7 @@ export interface CheatSheet {
   isProTipUnlocked?: boolean; // Tracks if pro tip is unlocked for the session/user
   interactiveElements?: InteractiveElement[];
   isBookmarked?: boolean;
+  imageUrl?: string; // Optional field for custom image URLs
 }
 
 export type UserTier = 'free' | 'premium';

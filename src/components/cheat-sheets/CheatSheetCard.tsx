@@ -67,7 +67,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     if (proTipUnlockTokens > 0) {
       const success = unlockProTipWithToken(sheet.id);
       if (success) {
-        toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens}` }); // proTipUnlockTokens is already updated in context by this point
+        toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens -1}` }); 
       } else {
         toast({ title: "Unlock Failed", description: "Something went wrong.", variant: "destructive" });
       }
@@ -81,12 +81,14 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   const secondTag = sheet.category?.split(' ')[0].toLowerCase() || 'strategy';
   const aiHint = `${firstTag} ${secondTag}`.trim();
 
+  const imageSrc = sheet.imageUrl || `https://placehold.co/400x250.png`;
+
 
   return (
     <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       <div className="relative w-full h-40">
         <Image 
-          src={`https://placehold.co/400x250.png`} 
+          src={imageSrc}
           alt={sheet.title} 
           layout="fill" 
           objectFit="cover" 
