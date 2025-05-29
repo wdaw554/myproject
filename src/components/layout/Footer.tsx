@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -19,7 +20,7 @@ export function Footer() {
       <div className="container py-8 px-4 md:px-6 space-y-4">
         {userTier === 'free' && <AdBanner />}
         <div className="flex flex-col md:flex-row items-center justify-between text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} MarketMuse. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} MarkSpark. All rights reserved.</p>
           <div className="flex gap-4 mt-2 md:mt-0">
             <Link href="/privacy-policy" className="hover:text-primary">
               Privacy Policy

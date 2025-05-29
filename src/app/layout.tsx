@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'MarketMuse: Marketing Cheat Sheets: No-Download Guides',
+  title: 'MarkSpark: Marketing Cheat Sheets & Quizzes', // Updated App Name
   description: '200+ in-app marketing hacks. Learn SEO, ads, and social media – no downloads, no BS!',
 };
 

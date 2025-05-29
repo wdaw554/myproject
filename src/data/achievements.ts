@@ -1,3 +1,4 @@
+
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 import type { Achievement } from '@/types';
 import type { AppContextProps } from '@/contexts/AppContext'; // Assuming AppContextProps is exported or define a relevant subset here
@@ -61,7 +62,7 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
     id: 'pro_tip_guru',
     name: 'Pro Tip Guru',
     description: 'Unlocked 5 Pro Tips.',
-    iconName: 'Brain',
+    iconName: 'Brain', // Changed from BrainIcon to Brain
     criteria: (context: Pick<AppContextProps, 'unlockedProTips'>) => context.unlockedProTips.size >= 5,
     isUnlocked: false,
     toastMessage: 'Achievement Unlocked: Pro Tip Guru! 🧠 You\'re soaking up the knowledge!',
@@ -69,10 +70,10 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
   {
     id: 'premium_user_achievement',
     name: 'Premium Power',
-    description: 'Upgraded to MarketMuse Premium!',
+    description: 'Upgraded to MarkSpark Premium!', // Updated App Name
     iconName: 'Gem',
     criteria: (context: Pick<AppContextProps, 'userTier'>) => context.userTier === 'premium',
     isUnlocked: false,
-    toastMessage: 'Achievement Unlocked: Premium Power! ✨ Welcome to the club!',
+    toastMessage: 'Achievement Unlocked: Premium Power! ✨ Welcome to the club!', // Updated App Name
   }
 ];

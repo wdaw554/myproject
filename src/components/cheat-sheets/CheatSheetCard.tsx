@@ -6,7 +6,7 @@ import type { CheatSheet, QuizQuestion, CaseStudy } from '@/types';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Bookmark, Lock, Lightbulb, Gem, HelpCircle, CheckCircle, BookOpen, Target as TargetIcon, Brain, FileText as FileTextIcon } from 'lucide-react';
+import { Bookmark, Lock, Lightbulb, Gem, HelpCircle, CheckCircle, BookOpen, Target as TargetIcon, Brain as BrainIcon, FileText as FileTextIcon, XCircle, CheckCircle2 } from 'lucide-react';
 import { useAppContext } from '@/hooks/useAppContext';
 import { TooltipIcon } from '@/components/shared/TooltipIcon';
 import Image from 'next/image';
@@ -24,7 +24,10 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { cn } from '@/lib/utils';
 
 
 interface CheatSheetCardProps {
@@ -40,11 +43,11 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     isProTipUnlocked,
     unlockProTipWithToken,
     proTipUnlockTokens,
-    checkAndUnlockAchievements // Added for achievement checks
+    checkAndUnlockAchievements
   } = useAppContext();
   const { toast } = useToast();
   const [isAlertOpen, setIsAlertOpen] = React.useState(false);
-
+  const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: { selectedOption: string | null; submitted: boolean } }>({});
 
   const bookmarked = isBookmarked(sheet.id);
   const effectivelyUnlocked = isProTipUnlocked(sheet.id);
@@ -57,7 +60,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       addBookmark(sheet.id);
       toast({ title: "Bookmarked!", description: `"${sheet.title}" added to your bookmarks.` });
     }
-    // Check achievements after bookmarking action
     setTimeout(() => checkAndUnlockAchievements(), 0);
   };
 
@@ -66,7 +68,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       const success = unlockProTipWithToken(sheet.id); 
       if (success) {
         toast({ title: "Pro Tip Unlocked!", description: "Premium members have all tips unlocked." });
-        setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievements
+        setTimeout(() => checkAndUnlockAchievements(), 0);
       }
       setIsAlertOpen(false);
       return;
@@ -76,9 +78,8 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       const success = unlockProTipWithToken(sheet.id);
       if (success) {
         toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens -1}` }); 
-        setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievements
+        setTimeout(() => checkAndUnlockAchievements(), 0);
       } else {
-        // This case should ideally not happen if tokens > 0, but as a fallback:
         toast({ title: "Unlock Failed", description: "Something went wrong.", variant: "destructive" });
       }
     } else {
@@ -90,6 +91,27 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   const firstTag = sheet.tags?.[0]?.split(' ')[0].toLowerCase() || 'marketing';
   const secondTag = sheet.category?.split(' ')[0].toLowerCase() || 'strategy';
   const aiHint = `${firstTag} ${secondTag}`.trim();
+
+  const handleQuizOptionChange = (quizIndex: number, selectedValue: string) => {
+    setQuizAnswers(prev => ({
+      ...prev,
+      [quizIndex]: {
+        ...(prev[quizIndex] || { submitted: false }),
+        selectedOption: selectedValue,
+      }
+    }));
+  };
+
+  const handleQuizSubmit = (quizIndex: number) => {
+    setQuizAnswers(prev => ({
+      ...prev,
+      [quizIndex]: {
+        ...(prev[quizIndex] || { selectedOption: null }),
+        submitted: true,
+      }
+    }));
+    // Potentially add achievement for completing a quiz in the future
+  };
 
   return (
     <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
@@ -141,7 +163,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
               <AccordionItem value="key-takeaways">
                 <AccordionTrigger className="text-xs font-semibold text-primary hover:no-underline">
                     <div className="flex items-center gap-2">
-                        <Brain className="h-4 w-4" /> Key Takeaways
+                        <BrainIcon className="h-4 w-4" /> Key Takeaways
                     </div>
                 </AccordionTrigger>
                 <AccordionContent className="pt-1 pl-2">
@@ -184,7 +206,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                                 <p className="text-foreground/70 mt-1 text-xs"><strong>Outcome:</strong> {study.outcome}</p>
                             </div>
                         ))}
-                        <p className="text-center text-muted-foreground text-xs italic mt-2">More detailed case study views coming soon!</p>
                     </AccordionContent>
                 </AccordionItem>
             )}
@@ -196,19 +217,66 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                             <HelpCircle className="h-4 w-4" /> Quick Quiz
                         </div>
                     </AccordionTrigger>
-                    <AccordionContent className="pt-1 pl-2 space-y-2">
-                        {sheet.quiz.map((q, i) => (
-                            <div key={i} className="p-2 border rounded-md bg-muted/30">
-                                <p className="font-semibold text-foreground/90">{i+1}. {q.question}</p>
-                                <ul className="list-disc list-inside space-y-1 mt-1 text-xs text-foreground/70">
-                                    {q.options.map((opt, idx) => <li key={idx}>{opt}</li>)}
-                                </ul>
-                                {q.explanation && (
-                                  <p className="text-xs mt-1 text-primary/80"><i>Explanation: {q.explanation}</i></p>
-                                )}
-                            </div>
-                        ))}
-                        <p className="text-center text-muted-foreground text-xs italic mt-2">Interactive quizzes coming soon!</p>
+                    <AccordionContent className="pt-1 pl-2 space-y-4">
+                      {sheet.quiz.map((q, quizIndex) => {
+                        const currentAnswer = quizAnswers[quizIndex];
+                        const isSubmitted = currentAnswer?.submitted;
+                        const selectedOptionIndex = currentAnswer?.selectedOption !== null ? parseInt(currentAnswer?.selectedOption as string, 10) : -1;
+                        
+                        return (
+                          <div key={quizIndex} className="p-3 border rounded-md bg-muted/30 space-y-2">
+                            <p className="font-semibold text-foreground/90">{quizIndex + 1}. {q.question}</p>
+                            <RadioGroup
+                              onValueChange={(value) => handleQuizOptionChange(quizIndex, value)}
+                              value={currentAnswer?.selectedOption ?? undefined}
+                              disabled={isSubmitted}
+                            >
+                              {q.options.map((opt, optionIndex) => {
+                                const optionId = `quiz-${sheet.id}-${quizIndex}-${optionIndex}`;
+                                let labelClass = "text-foreground/80";
+                                let icon = null;
+
+                                if (isSubmitted) {
+                                  if (optionIndex === q.correctAnswerIndex) {
+                                    labelClass = "text-green-600 font-semibold";
+                                    icon = <CheckCircle2 className="h-4 w-4 text-green-600 ml-2" />;
+                                  } else if (optionIndex === selectedOptionIndex) {
+                                    labelClass = "text-red-600 font-semibold";
+                                    icon = <XCircle className="h-4 w-4 text-red-600 ml-2" />;
+                                  } else {
+                                    labelClass = "text-muted-foreground";
+                                  }
+                                }
+
+                                return (
+                                  <div key={optionIndex} className="flex items-center space-x-2">
+                                    <RadioGroupItem value={optionIndex.toString()} id={optionId} disabled={isSubmitted} />
+                                    <Label htmlFor={optionId} className={cn("flex items-center", labelClass)}>
+                                      {opt} {icon}
+                                    </Label>
+                                  </div>
+                                );
+                              })}
+                            </RadioGroup>
+                            {!isSubmitted && (
+                              <Button 
+                                size="sm" 
+                                variant="outline"
+                                onClick={() => handleQuizSubmit(quizIndex)}
+                                disabled={currentAnswer?.selectedOption === null || currentAnswer?.selectedOption === undefined}
+                                className="mt-2 text-xs h-7"
+                              >
+                                Check Answer
+                              </Button>
+                            )}
+                            {isSubmitted && q.explanation && (
+                              <p className="text-xs mt-2 text-primary/90 pt-1 border-t border-dashed">
+                                <strong>Explanation:</strong> <em>{q.explanation}</em>
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
                     </AccordionContent>
                 </AccordionItem>
             )}
@@ -278,4 +346,3 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     </Card>
   );
 }
-

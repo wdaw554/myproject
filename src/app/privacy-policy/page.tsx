@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -16,7 +17,7 @@ export default function PrivacyPolicyPage() {
         <div className="space-y-6 text-foreground/90 prose prose-sm md:prose-base max-w-none prose-headings:text-primary prose-strong:text-foreground">
           <p><strong>Last Updated:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 
-          <p>Welcome to MarketMuse ("we," "our," or "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our MarketMuse application (the "App"). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the app.</p>
+          <p>Welcome to MarkSpark ("we," "our," or "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our MarkSpark application (the "App"). Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the app.</p>
 
           <h2 className="text-2xl font-semibold mt-6">Information We Collect</h2>
           <p>We may collect information about you in a variety of ways. The information we may collect via the App includes:</p>
@@ -50,7 +51,7 @@ export default function PrivacyPolicyPage() {
           <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
 
           <h2 className="text-2xl font-semibold">Contact Us</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:support@marketmuse.app" className="text-accent hover:underline">support@marketmuse.app</a> (This is a placeholder email).</p>
+          <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:support@markspark.app" className="text-accent hover:underline">support@markspark.app</a> (This is a placeholder email).</p>
         </div>
       </div>
     </div>

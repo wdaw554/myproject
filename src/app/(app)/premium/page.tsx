@@ -1,3 +1,4 @@
+
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 "use client";
 
@@ -15,7 +16,7 @@ export default function PremiumPage() {
     setUserTier('premium');
     toast({
       title: 'Congratulations! 🎉',
-      description: 'You are now a MarketMuse Premium member!',
+      description: 'You are now a MarkSpark Premium member!', // Updated App Name
       variant: 'default',
     });
   };
@@ -24,13 +25,13 @@ export default function PremiumPage() {
     setUserTier('free');
     toast({
       title: 'Subscription Changed',
-      description: 'You are now on the MarketMuse Free plan.',
+      description: 'You are now on the MarkSpark Free plan.', // Updated App Name
     });
   };
 
 
   const features = [
-    { icon: ShieldOff, text: "Ad-Free Experience", description: "Enjoy MarketMuse without any interruptions." },
+    { icon: ShieldOff, text: "Ad-Free Experience", description: "Enjoy MarkSpark without any interruptions." }, // Updated App Name
     { icon: Zap, text: "Unlock All Pro Tips Instantly", description: "Get immediate access to expert advice on every cheat sheet." },
     { icon: Gem, text: "Exclusive Future Features", description: "Be the first to access new tools like daily challenges and AI feedback." },
   ];
@@ -43,13 +44,13 @@ export default function PremiumPage() {
           Go Premium!
         </h1>
         <p className="mt-4 text-xl text-foreground/80">
-          Unlock the full power of MarketMuse and supercharge your marketing knowledge.
+          Unlock the full power of MarkSpark and supercharge your marketing knowledge. 
         </p>
       </div>
 
       <Card className="shadow-xl">
         <CardHeader>
-          <CardTitle className="text-2xl">MarketMuse Premium</CardTitle>
+          <CardTitle className="text-2xl">MarkSpark Premium</CardTitle> 
           <CardDescription>Get unlimited access to all features.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

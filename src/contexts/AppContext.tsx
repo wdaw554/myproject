@@ -8,24 +8,24 @@ import React, { createContext, useState, useEffect, useCallback, ReactNode } fro
 import { useToast } from '@/hooks/use-toast';
 import * as LucideIcons from 'lucide-react';
 
-const BOOKMARKS_STORAGE_KEY = 'marketmuse_bookmarks_v2';
-const THEME_STORAGE_KEY = 'marketmuse_theme_v2';
-const USER_TIER_STORAGE_KEY = 'marketmuse_user_tier_v2';
-const UNLOCKED_PRO_TIPS_STORAGE_KEY = 'marketmuse_unlocked_pro_tips_v2';
-const PRO_TIP_TOKENS_STORAGE_KEY = 'marketmuse_pro_tip_tokens_v2';
-const LAST_CLAIMED_DATE_STORAGE_KEY = 'marketmuse_last_claimed_date_v2';
-const CURRENT_STREAK_STORAGE_KEY = 'marketmuse_current_streak_v2';
-const LAST_STREAK_DAY_STORAGE_KEY = 'marketmuse_last_streak_day_v2';
-const ACHIEVEMENTS_STORAGE_KEY = 'marketmuse_achievements_v2';
+const BOOKMARKS_STORAGE_KEY = 'markspark_bookmarks_v1'; // Rebranded
+const THEME_STORAGE_KEY = 'markspark_theme_v1'; // Rebranded
+const USER_TIER_STORAGE_KEY = 'markspark_user_tier_v1'; // Rebranded
+const UNLOCKED_PRO_TIPS_STORAGE_KEY = 'markspark_unlocked_pro_tips_v1'; // Rebranded
+const PRO_TIP_TOKENS_STORAGE_KEY = 'markspark_pro_tip_tokens_v1'; // Rebranded
+const LAST_CLAIMED_DATE_STORAGE_KEY = 'markspark_last_claimed_date_v1'; // Rebranded
+const CURRENT_STREAK_STORAGE_KEY = 'markspark_current_streak_v1'; // Rebranded
+const LAST_STREAK_DAY_STORAGE_KEY = 'markspark_last_streak_day_v1'; // Rebranded
+const ACHIEVEMENTS_STORAGE_KEY = 'markspark_achievements_v1'; // Rebranded
 
 const INITIAL_TOKENS = 10;
 const DAILY_REWARD_FREE = 50;
 const DAILY_REWARD_PREMIUM = 60;
 
 const STREAK_BONUSES = {
-  3: 15, // Extra 15 tokens for a 3-day streak
-  7: 30, // Extra 30 tokens for a 7-day streak
-  14: 50, // Extra 50 tokens for a 14-day streak
+  3: 15, 
+  7: 30, 
+  14: 50,
 };
 
 export interface AppContextProps {
@@ -52,24 +52,22 @@ export interface AppContextProps {
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
 
-// Helper function to load and merge achievements
 const loadAchievementsFromStorage = (): Achievement[] => {
   const defaultAchievementsWithCriteria = INITIAL_ACHIEVEMENTS.map(ach => ({ ...ach, isUnlocked: false }));
   if (typeof window !== 'undefined') {
     const storedAchievementsData = localStorage.getItem(ACHIEVEMENTS_STORAGE_KEY);
     if (storedAchievementsData) {
       try {
-        // We only store {id, isUnlocked} pairs in localStorage
         const storedStatuses: Array<{ id: string; isUnlocked: boolean }> = JSON.parse(storedAchievementsData);
         const statusMap = new Map(storedStatuses.map(s => [s.id, s.isUnlocked]));
         
         return INITIAL_ACHIEVEMENTS.map(initialAch => ({
-          ...initialAch, // This ensures .criteria function is from INITIAL_ACHIEVEMENTS
+          ...initialAch, 
           isUnlocked: statusMap.get(initialAch.id) ?? false,
         }));
       } catch (error) {
         console.error("Failed to parse achievements from localStorage", error);
-        return defaultAchievementsWithCriteria; // Fallback if parsing fails
+        return defaultAchievementsWithCriteria;
       }
     }
   }
@@ -131,9 +129,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const storedLastStreakDay = localStorage.getItem(LAST_STREAK_DAY_STORAGE_KEY);
     if (storedLastStreakDay) setLastStreakDay(storedLastStreakDay);
 
-    // Achievements are now loaded correctly via useState initial function
-    // No need to re-load/parse them here which was causing the issue.
-
   }, []);
 
   useEffect(() => {
@@ -150,7 +145,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => { if (isMounted) localStorage.setItem(CURRENT_STREAK_STORAGE_KEY, currentStreak.toString()); }, [currentStreak, isMounted]);
   useEffect(() => { if (isMounted) { if (lastStreakDay) localStorage.setItem(LAST_STREAK_DAY_STORAGE_KEY, lastStreakDay); else localStorage.removeItem(LAST_STREAK_DAY_STORAGE_KEY);}}, [lastStreakDay, isMounted]);
   
-  // Save only {id, isUnlocked} for achievements to localStorage
   useEffect(() => {
     if (isMounted) {
       const achievementsToStore = achievements.map(({ id, isUnlocked }) => ({ id, isUnlocked }));
@@ -169,7 +163,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     let newAchievementsUnlocked = false;
     const updatedAchievements = achievements.map(ach => {
-      // Defensive check: ensure ach.criteria is a function before calling
       if (!ach.isUnlocked && ach.criteria && typeof ach.criteria === 'function' && ach.criteria(appContextSnapshot)) {
         const IconComponent = LucideIcons[ach.iconName] || LucideIcons.Award;
         toast({
@@ -214,13 +207,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const unlockProTipWithToken = useCallback((id: string): boolean => {
     if (userTier === 'premium') {
       setUnlockedProTips(prev => new Set(prev).add(id));
-      setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievement after unlock
+      setTimeout(() => checkAndUnlockAchievements(), 0); 
       return true;
     }
     if (proTipUnlockTokens > 0) {
       setProTipUnlockTokens(prev => prev - 1);
       setUnlockedProTips(prev => new Set(prev).add(id));
-      setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievement after unlock
+      setTimeout(() => checkAndUnlockAchievements(), 0); 
       return true;
     }
     return false;
