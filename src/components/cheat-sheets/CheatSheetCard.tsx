@@ -37,7 +37,8 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     userTier, 
     isProTipUnlocked,
     unlockProTipWithToken,
-    proTipUnlockTokens
+    proTipUnlockTokens,
+    checkAndUnlockAchievements // Added for achievement checks
   } = useAppContext();
   const { toast } = useToast();
   const [isAlertOpen, setIsAlertOpen] = React.useState(false);
@@ -54,12 +55,17 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       addBookmark(sheet.id);
       toast({ title: "Bookmarked!", description: `"${sheet.title}" added to your bookmarks.` });
     }
+    // Check achievements after bookmarking action
+    setTimeout(() => checkAndUnlockAchievements(), 0);
   };
 
   const handleUnlockProTipAttempt = () => {
     if (userTier === 'premium') { 
-      unlockProTipWithToken(sheet.id); 
-      toast({ title: "Pro Tip Unlocked!", description: "Premium members have all tips unlocked." });
+      const success = unlockProTipWithToken(sheet.id); 
+      if (success) {
+        toast({ title: "Pro Tip Unlocked!", description: "Premium members have all tips unlocked." });
+        setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievements
+      }
       setIsAlertOpen(false);
       return;
     }
@@ -68,7 +74,9 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       const success = unlockProTipWithToken(sheet.id);
       if (success) {
         toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens -1}` }); 
+        setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievements
       } else {
+        // This case should ideally not happen if tokens > 0, but as a fallback:
         toast({ title: "Unlock Failed", description: "Something went wrong.", variant: "destructive" });
       }
     } else {

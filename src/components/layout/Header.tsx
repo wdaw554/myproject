@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { MountainIcon, Sun, Moon, Home, Bookmark, Gem, Gift } from 'lucide-react';
+import { MountainIcon, Sun, Moon, Home, Bookmark, Gem, Gift, Flame } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAppContext } from '@/hooks/useAppContext';
 import { usePathname } from 'next/navigation';
@@ -11,7 +11,14 @@ import { useToast } from '@/hooks/use-toast';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export function Header() {
-  const { theme, toggleTheme, canClaimDailyReward, claimDailyReward, proTipUnlockTokens } = useAppContext();
+  const { 
+    theme, 
+    toggleTheme, 
+    canClaimDailyReward, 
+    claimDailyReward, 
+    proTipUnlockTokens,
+    currentStreak
+  } = useAppContext();
   const { toast } = useToast();
   const pathname = usePathname();
 
@@ -24,9 +31,20 @@ export function Header() {
   const handleClaimReward = () => {
     const reward = claimDailyReward();
     if (reward.success) {
+      let description = `You received ${reward.tokensAwarded} Pro Tip Tokens.`;
+      if (reward.bonusTokens > 0) {
+        description += ` Plus ${reward.bonusTokens} bonus tokens for your ${reward.newStreak}-day streak!`;
+      }
+      description += ` You now have ${proTipUnlockTokens + reward.tokensAwarded + reward.bonusTokens} tokens.`;
+      
       toast({
-        title: 'Daily Reward Claimed! ✨',
-        description: `You received ${reward.tokensAwarded} Pro Tip Tokens. You now have ${proTipUnlockTokens + reward.tokensAwarded} tokens.`,
+        title: (
+          <div className="flex items-center gap-2">
+            <Gift className="h-5 w-5 text-yellow-500" />
+            <span>Daily Reward Claimed!</span>
+          </div>
+        ),
+        description: description,
       });
     } else {
       toast({
@@ -61,11 +79,11 @@ export function Header() {
             </Button>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 md:gap-3">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant="ghost" size="sm" className="relative" disabled>
+                <Button variant="ghost" size="sm" className="relative px-2" disabled>
                   <Gem className="h-4 w-4 mr-1 text-primary" /> {proTipUnlockTokens}
                 </Button>
               </TooltipTrigger>
@@ -74,6 +92,22 @@ export function Header() {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+
+          {currentStreak > 0 && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="sm" className="relative px-2" disabled>
+                    <Flame className="h-4 w-4 mr-1 text-orange-500" /> {currentStreak}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{currentStreak}-Day Streak! Keep it up!</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+
 
           {showClaimButton && (
             <TooltipProvider>
@@ -84,7 +118,7 @@ export function Header() {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Claim Daily Tokens</p>
+                  <p>Claim Daily Reward</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

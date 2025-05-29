@@ -22,3 +22,13 @@ export interface CheatSheet {
 }
 
 export type UserTier = 'free' | 'premium';
+
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  iconName: keyof typeof import('lucide-react')['icons'];
+  criteria: (context: any) => boolean; // Function to check if achievement is earned
+  isUnlocked: boolean;
+  toastMessage?: string; // Optional custom message for toast
+}
