@@ -5,29 +5,32 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
   {
     id: 'seo-basics-1',
     title: 'SEO Basics: In-Depth Keyword Research',
-    content: "Keyword research is the absolute cornerstone of any successful SEO strategy. It's about understanding the precise language your target audience uses when searching for your products, services, or information. Start by brainstorming core topics related to your business. Then, use tools like Google Keyword Planner (free), Ahrefs, SEMrush, or Ubersuggest to expand these into specific keyword ideas. Analyze metrics like search volume (how often a keyword is searched), keyword difficulty (how hard it is to rank for), and click-through rate (CTR) potential. Crucially, always consider search intent: Is the user looking for information (informational), trying to find a specific website (navigational), ready to make a purchase (transactional), or researching before buying (commercial investigation)? Aligning your content with user intent is key to ranking well and satisfying users. Dive deep into competitor keyword strategies to find gaps and opportunities. Also explore related searches and 'People Also Ask' sections on Google for content ideas and long-tail variations. Regularly update your keyword research as market trends and user behavior evolve.",
+    content: "Keyword research is the absolute cornerstone of any successful SEO strategy. It's about understanding the precise language your target audience uses when searching for your products, services, or information. Start by brainstorming core topics related to your business. Then, use tools like Google Keyword Planner (free), Ahrefs, SEMrush, or Ubersuggest to expand these into specific keyword ideas. Analyze metrics like search volume (how often a keyword is searched), keyword difficulty (how hard it is to rank for), and click-through rate (CTR) potential. Crucially, always consider search intent: Is the user looking for information (informational), trying to find a specific website (navigational), ready to make a purchase (transactional), or researching before buying (commercial investigation)? Aligning your content with user intent is key to ranking well and satisfying users. Dive deep into competitor keyword strategies to find gaps and opportunities. Also explore related searches and 'People Also Ask' sections on Google for content ideas and long-tail variations. Regularly update your keyword research as market trends and user behavior evolve. For instance, seasonal keywords might spike at certain times of year, or new industry jargon could emerge. Staying agile and responsive to these changes is crucial for sustained SEO success. Remember to also consider semantic search, where search engines understand the context and intent behind queries, not just exact keyword matches. This means incorporating related terms and concepts into your content naturally.",
     category: 'SEO',
-    tags: ['seo', 'keywords', 'research', 'beginner', 'strategy', 'intent'],
-    proTip: "Don't just focus on high-volume keywords. Long-tail keywords (typically 3+ words) often have lower competition, target a more specific audience, and can have significantly higher conversion rates because they capture users further down the buying funnel. For example, instead of 'shoes', target 'buy red running shoes for women size 8'. Also, explore 'People Also Ask' boxes and related searches on Google SERPs for content ideas. Analyze the SERP features for your target keywords (e.g., featured snippets, video carousels) to understand content format opportunities.",
+    tags: ['seo', 'keywords', 'research', 'beginner', 'strategy', 'intent', 'long-tail'],
+    proTip: "Don't just focus on high-volume keywords. Long-tail keywords (typically 3+ words) often have lower competition, target a more specific audience, and can have significantly higher conversion rates because they capture users further down the buying funnel. For example, instead of 'shoes', target 'buy red running shoes for women size 8'. Also, explore 'People Also Ask' boxes and related searches on Google SERPs for content ideas. Analyze the SERP features for your target keywords (e.g., featured snippets, video carousels) to understand content format opportunities. Another advanced tip: use keyword gap analysis tools to compare your keyword rankings against competitors, identifying terms they rank for that you don't, which can highlight valuable content opportunities.",
     interactiveElements: [
       { iconName: 'Search', term: 'Keyword Planner', tip: 'Google Keyword Planner is a free tool to discover new keywords, see their search volume, and get bid estimates for Google Ads.' },
       { iconName: 'Target', term: 'Search Intent', tip: 'Understanding if a user wants to learn, find, or buy is crucial for creating content that ranks and converts.' },
       { iconName: 'Filter', term: 'Keyword Difficulty', tip: 'A metric (often 0-100) estimating how hard it is to rank on page 1 for a given keyword. Higher means harder.' },
       { iconName: 'TrendingUp', term: 'Search Volume', tip: 'The average number of times a specific keyword is searched for in a given period (usually monthly).'},
-      { iconName: 'Users', term: 'Competitor Analysis', tip: 'Analyze keywords your competitors rank for to find opportunities you might be missing.'}
+      { iconName: 'Users', term: 'Competitor Analysis', tip: 'Analyze keywords your competitors rank for to find opportunities you might be missing.'},
+      { iconName: 'Link', term: 'Long-Tail Keywords', tip: 'More specific, multi-word phrases that often indicate higher purchase intent and have lower competition.'}
     ],
     imageUrl: 'https://placehold.co/400x250.png?text=Deep+Keyword+Dive',
     learningObjectives: [
       "Understand the importance of keyword research in SEO.",
-      "Learn methods for discovering relevant keywords.",
-      "Identify key metrics for evaluating keywords (volume, difficulty, intent).",
-      "Recognize the value of long-tail keywords."
+      "Learn methods for discovering relevant keywords using various tools.",
+      "Identify and analyze key metrics for evaluating keywords (volume, difficulty, intent, CTR).",
+      "Recognize the value of long-tail keywords and semantic search concepts.",
+      "Learn how to analyze competitor keyword strategies for opportunities."
     ],
     keyTakeaways: [
-      "Keyword research is foundational to SEO success.",
-      "Align content with user search intent.",
-      "Long-tail keywords often have higher conversion rates.",
-      "Continuously monitor and update your keyword strategy."
+      "Keyword research is foundational to SEO success and must be ongoing.",
+      "Align content with user search intent for better ranking and user satisfaction.",
+      "Long-tail keywords often have higher conversion rates and lower competition.",
+      "Continuously monitor and update your keyword strategy based on trends and performance.",
+      "Use a variety of tools and techniques for comprehensive keyword discovery."
     ],
     quiz: [
       {
@@ -41,42 +44,51 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
         options: ["shoes", "running shoes", "best red running shoes for flat feet women", "red shoes"],
         correctAnswerIndex: 2,
         explanation: "Long-tail keywords are longer, more specific phrases that users search for, often indicating they are closer to a purchase or have a very specific need."
+      },
+      {
+        question: "What does 'Keyword Difficulty' typically measure?",
+        options: ["How hard it is for users to type the keyword", "How complex the keyword's meaning is", "How competitive it is to rank on the first page for that keyword", "How many words are in the keyword phrase"],
+        correctAnswerIndex: 2,
+        explanation: "Keyword Difficulty is a metric used to estimate how hard it would be to rank in search engine results for a particular keyword, usually on a scale (e.g., 0-100)."
       }
     ],
     caseStudies: [
       {
         title: "Fictional Bakery Boosts Local Orders via Keyword Research",
-        description: "A small local bakery, 'Sweet Treats Corner,' struggled to attract online orders. They primarily targeted broad keywords like 'bakery' and 'cakes.' After conducting thorough local keyword research, they identified terms like 'custom birthday cakes [City Name]' and 'fresh bread delivery [Neighborhood].'",
-        outcome: "By optimizing their website and Google Business Profile for these specific, local long-tail keywords, 'Sweet Treats Corner' saw a 150% increase in online order inquiries from their target local area within three months and a 70% rise in foot traffic citing online discovery."
+        description: "A small local bakery, 'Sweet Treats Corner,' struggled to attract online orders. They primarily targeted broad keywords like 'bakery' and 'cakes.' After conducting thorough local keyword research, they identified terms like 'custom birthday cakes [City Name]' and 'fresh bread delivery [Neighborhood].' They also discovered related informational keywords like 'how to choose a wedding cake designer' and created blog content around them.",
+        outcome: "By optimizing their website, Google Business Profile for these specific, local long-tail keywords, and creating helpful blog content, 'Sweet Treats Corner' saw a 150% increase in online order inquiries from their target local area within three months and a 70% rise in foot traffic citing online discovery. Their blog posts also started ranking for informational queries, establishing them as local experts."
       }
     ]
   },
   {
     id: 'social-media-engagement-1',
     title: 'Mastering Instagram Engagement Tactics',
-    content: "Boosting Instagram engagement requires a multi-faceted approach. Consistently use Stories with interactive elements like polls, quizzes, Q&A stickers, and countdowns. Reels are powerful for reach; create original, entertaining, or educational short-form video content. Respond to comments and DMs promptly and authentically – treat it like a conversation. Run contests and giveaways that encourage liking, sharing, and tagging friends. Collaborate with relevant influencers or complementary brands in your niche to tap into new audiences. Go live to interact with your followers in real-time. Utilize user-generated content (UGC) by encouraging followers to share their experiences with your brand and re-sharing the best submissions (with credit). Experiment with different post formats like carousels, guides, and saved content.",
+    content: "Boosting Instagram engagement requires a multi-faceted approach. Consistently use Stories with interactive elements like polls, quizzes, Q&A stickers, and countdowns. Reels are powerful for reach; create original, entertaining, or educational short-form video content. Respond to comments and DMs promptly and authentically – treat it like a conversation. Run contests and giveaways that encourage liking, sharing, and tagging friends. Collaborate with relevant influencers or complementary brands in your niche to tap into new audiences. Go live to interact with your followers in real-time. Utilize user-generated content (UGC) by encouraging followers to share their experiences with your brand and re-sharing the best submissions (with credit). Experiment with different post formats like carousels (great for storytelling or step-by-step guides), guides (curated lists of tips or products), and saved content. Analyze your Instagram Insights regularly to understand which content types, posting times, and topics resonate most with your audience. Adapt your strategy based on this data.",
     category: 'Social Media',
-    tags: ['instagram', 'social media', 'engagement', 'marketing', 'community', 'reels'],
-    proTip: "Actively encourage and feature User-Generated Content (UGC). Create a unique brand hashtag and ask followers to share photos or videos using your product/service. UGC builds immense social proof, trust, and a strong sense of community. Regularly reposting UGC (with credit) makes your audience feel valued. Also, analyze your Instagram Insights to see when your audience is most active and tailor your posting schedule accordingly.",
+    tags: ['instagram', 'social media', 'engagement', 'marketing', 'community', 'reels', 'stories'],
+    proTip: "Actively encourage and feature User-Generated Content (UGC). Create a unique brand hashtag and ask followers to share photos or videos using your product/service. UGC builds immense social proof, trust, and a strong sense of community. Regularly reposting UGC (with credit) makes your audience feel valued. Also, analyze your Instagram Insights to see when your audience is most active and tailor your posting schedule accordingly. Don't just post and ghost; dedicate time after posting to respond to initial comments to fuel further engagement. Engagement pods, while controversial, can be explored cautiously for initial boosts but prioritize authentic interaction.",
     interactiveElements: [
       { iconName: 'Instagram', term: 'Reels', tip: 'Instagram Reels are short, engaging videos that can significantly boost visibility and organic reach due to their prominent placement.' },
       { iconName: 'Users', term: 'Influencers', tip: 'Micro-influencers (1K-100K followers) can be more cost-effective and often have a more engaged, niche audience than macro-influencers.' },
       { iconName: 'Sticker', term: 'Interactive Stickers', tip: 'Use polls, quizzes, sliders, and Q&A stickers in Stories to encourage direct interaction and gather feedback.'},
       { iconName: 'MessageSquare', term: 'Prompt Responses', tip: 'Aim to reply to comments and DMs within a few hours to show your audience you value their engagement.'},
-      { iconName: 'Repeat', term: 'User-Generated Content (UGC)', tip: 'Content created by your audience featuring your brand. Highly authentic and builds trust.'}
+      { iconName: 'Repeat', term: 'User-Generated Content (UGC)', tip: 'Content created by your audience featuring your brand. Highly authentic and builds trust.'},
+      { iconName: 'Layers', term: 'Carousel Posts', tip: 'Use multiple images or videos in one post to tell a story or provide more detailed information.'}
     ],
     imageUrl: 'https://placehold.co/400x250.png?text=Insta+Engagement+Pro',
     learningObjectives: [
         "Identify various methods to increase Instagram engagement.",
-        "Understand the role of different Instagram features (Stories, Reels, Live).",
+        "Understand the role of different Instagram features (Stories, Reels, Live, Carousels, Guides).",
         "Learn how to foster a community through interaction and UGC.",
-        "Recognize the importance of analytics in refining engagement strategies."
+        "Recognize the importance of analytics in refining engagement strategies.",
+        "Develop strategies for responding to comments and DMs effectively."
     ],
     keyTakeaways: [
         "Consistency and interactivity are key to Instagram engagement.",
-        "Reels and Stories offer powerful tools for reach and interaction.",
+        "Reels and Stories offer powerful tools for reach and interaction; Carousels are great for depth.",
         "Authentic communication and UGC build trust and community.",
-        "Responding promptly to comments and DMs is crucial."
+        "Responding promptly to comments and DMs is crucial for nurturing relationships.",
+        "Data from Instagram Insights should regularly inform your content strategy."
     ],
     quiz: [
         {
@@ -87,45 +99,54 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
         },
         {
             question: "Which Instagram feature is best for short, entertaining video content designed for wide reach?",
-            options: ["Instagram Guides", "Instagram Stories", "Instagram Reels", "IGTV"],
+            options: ["Instagram Guides", "Instagram Stories", "Instagram Reels", "IGTV (discontinued)"],
             correctAnswerIndex: 2,
             explanation: "Instagram Reels are specifically designed for short-form video content and are heavily promoted by the platform's algorithm for discovery."
+        },
+        {
+            question: "What is a primary benefit of using interactive stickers in Instagram Stories?",
+            options: ["They automatically increase follower count.", "They make stories longer.", "They encourage direct audience participation and feedback.", "They guarantee your story appears first in feeds."],
+            correctAnswerIndex: 2,
+            explanation: "Interactive stickers like polls, quizzes, and Q&A boxes are designed to make Stories more engaging by prompting direct responses from viewers."
         }
     ],
     caseStudies: [
         {
             title: "Fashion Startup Skyrockets Brand Awareness with Reels Challenge",
-            description: "A new sustainable fashion brand, 'EcoThreads,' wanted to quickly build brand awareness on Instagram. They launched a Reels challenge with a unique branded sound, encouraging users to showcase their creative sustainable outfits using #EcoThreadsStyle.",
-            outcome: "The challenge went viral, with thousands of users participating. 'EcoThreads' gained over 20,000 new followers in two weeks, and their website traffic from Instagram increased by 300%. They also collected a vast amount of UGC for future marketing."
+            description: "A new sustainable fashion brand, 'EcoThreads,' wanted to quickly build brand awareness on Instagram. They launched a Reels challenge with a unique branded sound, encouraging users to showcase their creative sustainable outfits using #EcoThreadsStyle. They also partnered with micro-influencers to kickstart participation.",
+            outcome: "The challenge went viral, with thousands of users participating. 'EcoThreads' gained over 20,000 new followers in two weeks, and their website traffic from Instagram increased by 300%. They also collected a vast amount of UGC for future marketing and saw a significant uplift in brand mentions across the platform."
         }
     ]
   },
   {
     id: 'email-marketing-list-building-1',
     title: 'Strategic Email List Building Techniques',
-    content: "A healthy email list is a valuable asset. Grow yours by offering high-value lead magnets such as comprehensive ebooks, exclusive checklists, templates, free tools, or access to webinars/workshops. Place clear, compelling Call-to-Actions (CTAs) on your website, blog posts, and even social media profiles. Implement well-timed exit-intent popups on your website to capture visitors before they leave. Ensure all list-building activities are compliant with data privacy regulations like GDPR and CAN-SPAM, including clear consent mechanisms (double opt-in recommended) and easy unsubscribe options. Consider running contests or promotions that require an email signup. Partner with complementary businesses for cross-promotion opportunities.",
+    content: "A healthy email list is a valuable asset. Grow yours by offering high-value lead magnets such as comprehensive ebooks, exclusive checklists, templates, free tools, or access to webinars/workshops. Place clear, compelling Call-to-Actions (CTAs) on your website (homepage, blog posts, sidebars, footers), and even social media profiles. Implement well-timed exit-intent popups on your website to capture visitors before they leave – test different offers here. Ensure all list-building activities are compliant with data privacy regulations like GDPR and CAN-SPAM, including clear consent mechanisms (double opt-in recommended for higher quality list) and easy unsubscribe options. Consider running contests or promotions that require an email signup. Partner with complementary businesses for cross-promotion opportunities, like co-hosting a webinar or offering a bundled lead magnet. Optimize your landing pages specifically for email sign-ups with minimal distractions and a strong value proposition.",
     category: 'Email Marketing',
-    tags: ['email', 'list building', 'leads', 'marketing', 'lead magnet', 'cta'],
-    proTip: "Segment your email list from the very beginning. Even simple segmentation (e.g., based on the lead magnet they signed up for, their interests indicated at signup, or their engagement level) allows you to send more targeted, relevant, and ultimately more effective email campaigns. Use welcome emails to ask for preferences or to set expectations about email frequency and content.",
+    tags: ['email', 'list building', 'leads', 'marketing', 'lead magnet', 'cta', 'gdpr'],
+    proTip: "Segment your email list from the very beginning. Even simple segmentation (e.g., based on the lead magnet they signed up for, their interests indicated at signup, or their engagement level) allows you to send more targeted, relevant, and ultimately more effective email campaigns. Use welcome emails to ask for preferences (e.g., content topics, email frequency) or to set expectations about email frequency and content. This early segmentation sets the stage for better personalization down the line. Additionally, offer multiple, varied lead magnets that appeal to different segments of your audience or different stages of the customer journey.",
     interactiveElements: [
       { iconName: 'Magnet', term: 'Lead Magnets', tip: 'A lead magnet is a valuable free resource or offer given in exchange for a user\'s email address and contact information.' },
       { iconName: 'MousePointerClick', term: 'CTAs', tip: 'A Call-To-Action (e.g., "Download Now", "Subscribe") prompts users to take a specific, desired action.' },
       { iconName: 'FileText', term: 'Ebooks/Guides', tip: 'In-depth guides on topics relevant to your audience make excellent lead magnets.'},
       { iconName: 'ShieldCheck', term: 'GDPR/CAN-SPAM', tip: 'Ensure your email practices comply with anti-spam and data privacy laws in your target regions.'},
-      { iconName: 'ChevronsRight', term: 'Exit-Intent Popups', tip: 'Popups that appear when a user shows intent to leave your website, offering a last chance to convert them.'}
+      { iconName: 'ChevronsRight', term: 'Exit-Intent Popups', tip: 'Popups that appear when a user shows intent to leave your website, offering a last chance to convert them.'},
+      { iconName: 'Users', term: 'List Segmentation', tip: 'Dividing your email list into smaller groups based on shared characteristics for more targeted messaging.'}
     ],
     imageUrl: 'https://placehold.co/400x250.png?text=Grow+Email+List',
      learningObjectives: [
-      "Understand various techniques for building an email list.",
-      "Learn how to create effective lead magnets and CTAs.",
-      "Recognize the importance of data privacy compliance (GDPR, CAN-SPAM).",
-      "Appreciate the benefits of list segmentation from the start."
+      "Understand various techniques for building an email list effectively.",
+      "Learn how to create compelling lead magnets and strategically place CTAs.",
+      "Recognize the importance of data privacy compliance (GDPR, CAN-SPAM) in list building.",
+      "Appreciate the benefits of list segmentation from the moment of signup.",
+      "Explore methods for optimizing landing pages for email capture."
     ],
     keyTakeaways: [
-      "Offer high value in exchange for email sign-ups.",
-      "Clear CTAs and strategic placement are crucial.",
-      "Always prioritize user consent and data privacy.",
-      "Segmentation improves email relevance and effectiveness."
+      "Offer high value in exchange for email sign-ups through diverse lead magnets.",
+      "Clear CTAs and strategic placement on multiple channels are crucial.",
+      "Always prioritize user consent (double opt-in recommended) and data privacy.",
+      "Segmentation improves email relevance and effectiveness, starting from the welcome email.",
+      "Continuously test and optimize your list-building tactics."
     ],
     quiz: [
       {
@@ -139,79 +160,313 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
         options: ["Users must opt-in twice on the same form", "Users confirm their subscription via a confirmation email", "Two people must approve an email before it's sent", "Users subscribe to two different lists simultaneously"],
         correctAnswerIndex: 1,
         explanation: "Double opt-in requires subscribers to confirm their email address after initially signing up, ensuring higher list quality and explicit consent."
+      },
+      {
+        question: "Which of these is a key benefit of using exit-intent popups for list building?",
+        options: ["They improve website loading speed.", "They offer a last chance to convert a departing visitor.", "They are primarily for mobile users.", "They guarantee GDPR compliance."],
+        correctAnswerIndex: 1,
+        explanation: "Exit-intent popups are designed to detect when a user is about to leave the page and present them with an offer, such as signing up for a newsletter, to try and retain them."
       }
     ],
     caseStudies: [
       {
         title: "SaaS Startup Grows Demo Requests with Targeted Webinar Lead Magnet",
-        description: "A B2B SaaS company, 'AnalytiCo,' wanted to increase demo requests for their new analytics software. They created a free, in-depth webinar showcasing how to solve common industry pain points using their tool, promoted via their blog and LinkedIn.",
-        outcome: "The webinar attracted hundreds of sign-ups. By nurturing these leads with a follow-up email sequence offering a personalized demo, 'AnalytiCo' increased their qualified demo requests by 60% in one quarter, significantly boosting their sales pipeline."
+        description: "A B2B SaaS company, 'AnalytiCo,' wanted to increase demo requests for their new analytics software. They created a free, in-depth webinar showcasing how to solve common industry pain points using their tool, promoted via their blog, LinkedIn, and targeted pop-ups on relevant service pages.",
+        outcome: "The webinar attracted hundreds of sign-ups. By nurturing these leads with a follow-up email sequence offering a personalized demo, and segmenting them based on webinar engagement, 'AnalytiCo' increased their qualified demo requests by 60% in one quarter, significantly boosting their sales pipeline and reducing cost per lead."
       }
     ]
   },
   {
     id: 'paid-ads-google-1',
     title: 'Comprehensive Google Ads Campaign Setup',
-    content: "Setting up a Google Ads campaign involves several key steps. First, clearly define your campaign goals (e.g., increase brand awareness, generate leads, drive sales). Next, choose the right campaign type based on your goals (Search, Display, Video, Shopping, Performance Max). Conduct thorough keyword research for Search campaigns. Organize your campaign into ad groups with tightly themed keywords. Set a realistic daily or lifetime budget and select an appropriate bidding strategy (e.g., Maximize Clicks, Maximize Conversions, Target CPA). Write compelling, benefit-driven ad copy and create multiple ad variations for A/B testing. Use relevant ad extensions (sitelinks, callouts, location, image) to enhance ad visibility and provide more information. Ensure conversion tracking is properly set up using Google Analytics 4 and the Google Ads tag. Monitor campaign performance daily and optimize bids, keywords, ad copy, and targeting regularly. Utilize audience targeting options to refine who sees your ads.",
+    content: "Setting up a Google Ads campaign involves several key steps. First, clearly define your campaign goals (e.g., increase brand awareness, generate leads, drive sales, app installs). Next, choose the right campaign type based on your goals (Search, Display, Video, Shopping, Performance Max, App). Conduct thorough keyword research for Search campaigns, focusing on user intent and utilizing match types effectively (broad, phrase, exact). Organize your campaign into tightly themed ad groups, each with a small set of closely related keywords and highly relevant ad copy. Set a realistic daily or lifetime budget and select an appropriate bidding strategy (e.g., Maximize Clicks, Maximize Conversions, Target CPA, Target ROAS). Write compelling, benefit-driven ad copy (at least 3-5 variations per ad group for Responsive Search Ads) and create multiple ad variations for A/B testing. Use relevant ad extensions (sitelinks, callouts, structured snippets, location, image, lead form) to enhance ad visibility and provide more information. Ensure conversion tracking is properly set up using Google Analytics 4 and the Google Ads tag for accurate performance measurement. Monitor campaign performance daily/weekly and optimize bids, keywords, ad copy, targeting, and negative keywords regularly. Utilize audience targeting options (e.g., remarketing lists, similar audiences, in-market audiences, custom audiences) to refine who sees your ads.",
     category: 'Paid Advertising',
-    tags: ['google ads', 'ppc', 'paid search', 'advertising', 'sem', 'campaign setup'],
-    proTip: "Make extensive use of negative keywords. These are terms for which you *don't* want your ads to show. Regularly review your Search Terms report to identify irrelevant queries that triggered your ads and add them as negative keywords. This saves budget, improves click-through rates (CTR), and increases Quality Score. Also, create separate campaigns for different match types (e.g., exact, phrase) for better control.",
+    tags: ['google ads', 'ppc', 'paid search', 'advertising', 'sem', 'campaign setup', 'conversion tracking'],
+    proTip: "Make extensive use of negative keywords from day one and continuously refine your list. Regularly review your Search Terms report (what users actually typed to trigger your ads) to identify irrelevant queries that triggered your ads and add them as negative keywords at the ad group or campaign level. This saves budget, improves click-through rates (CTR), and increases Quality Score. Also, create separate campaigns for different match types (e.g., exact, phrase) or different levels of user intent for better control and budget allocation. For example, high-intent 'buy now' keywords might warrant a separate campaign from broader research-focused keywords.",
     interactiveElements: [
-      { iconName: 'Target', term: 'Campaign Goals', tip: 'Define if you want leads, sales, website traffic, or brand awareness. This dictates campaign type.' },
-      { iconName: 'DollarSign', term: 'Bidding Strategy', tip: 'Choose automated (e.g., Target CPA) or manual bidding. Automated strategies leverage Google\'s AI.' },
-      { iconName: 'FilePlus', term: 'Ad Extensions', tip: 'Sitelinks, callouts, structured snippets, image extensions, etc., provide more info and increase ad size.' },
-      { iconName: 'MinusCircle', term: 'Negative Keywords', tip: 'Prevent ads from showing on irrelevant searches, saving money and improving relevance.'},
-      { iconName: 'Group', term: 'Ad Groups', tip: 'Organize your campaign with tightly themed ad groups, each containing relevant keywords and ads.'}
+      { iconName: 'Target', term: 'Campaign Goals', tip: 'Define if you want leads, sales, website traffic, or brand awareness. This dictates campaign type and bidding.' },
+      { iconName: 'DollarSign', term: 'Bidding Strategy', tip: 'Choose automated (e.g., Target CPA, Target ROAS) or manual bidding. Automated strategies leverage Google\'s AI.' },
+      { iconName: 'FilePlus', term: 'Ad Extensions', tip: 'Sitelinks, callouts, structured snippets, image extensions, etc., provide more info and increase ad size and CTR.' },
+      { iconName: 'MinusCircle', term: 'Negative Keywords', tip: 'Prevent ads from showing on irrelevant searches, saving money and improving relevance. Crucial for efficiency.'},
+      { iconName: 'Group', term: 'Ad Groups', tip: 'Organize your campaign with tightly themed ad groups, each containing relevant keywords and ads for higher Quality Scores.'},
+      { iconName: 'Type', term: 'Responsive Search Ads (RSAs)', tip: 'Provide multiple headlines and descriptions; Google AI tests combinations to find the best performers.'}
     ],
     imageUrl: 'https://placehold.co/400x250.png?text=Google+Ads+Setup',
+    learningObjectives: [
+      "Understand the fundamental steps to set up a Google Ads campaign.",
+      "Learn to define campaign goals and select appropriate campaign types.",
+      "Grasp the importance of keyword research, ad group structure, and match types.",
+      "Recognize how to write compelling ad copy and utilize ad extensions effectively.",
+      "Understand the basics of budget setting, bidding strategies, and conversion tracking."
+    ],
+    keyTakeaways: [
+      "Clear goals and proper campaign structure are essential for Google Ads success.",
+      "Thorough keyword research and tight ad group theming improve relevance and Quality Score.",
+      "Compelling ad copy and strategic use of extensions boost CTR and performance.",
+      "Accurate conversion tracking is vital for measuring ROI and making informed optimizations.",
+      "Continuous monitoring, testing, and refinement of all campaign elements are key to maximizing results."
+    ],
+    quiz: [
+      {
+        question: "What is the primary purpose of using Negative Keywords in Google Ads?",
+        options: [
+          "To increase the bid for certain keywords",
+          "To prevent ads from showing for irrelevant search queries",
+          "To automatically pause underperforming keywords",
+          "To target users in specific negative geographic locations"
+        ],
+        correctAnswerIndex: 1,
+        explanation: "Negative keywords stop your ads from being triggered by search terms that are not relevant to your products or services, saving budget and improving ad relevance."
+      },
+      {
+        question: "Which of the following is NOT a standard Google Ads campaign type?",
+        options: [
+          "Search",
+          "Display",
+          "Email",
+          "Shopping"
+        ],
+        correctAnswerIndex: 2,
+        explanation: "While Google Ads can be used to drive traffic for email sign-ups, 'Email' is not a distinct campaign type within the Google Ads platform itself. Search, Display, Shopping, Video, App, and Performance Max are standard types."
+      },
+      {
+        question: "In Responsive Search Ads (RSAs), what is the benefit of providing multiple headlines and descriptions?",
+        options: [
+            "It guarantees a lower Cost Per Click.",
+            "It allows Google's AI to test different combinations and optimize for performance.",
+            "It makes the ad appear larger on the search results page.",
+            "It automatically translates the ad into multiple languages."
+        ],
+        correctAnswerIndex: 1,
+        explanation: "RSAs use machine learning to serve the most relevant combination of headlines and descriptions to different users based on their search query and other signals, aiming to improve click-through and conversion rates."
+      }
+    ],
+    caseStudies: [
+      {
+        title: "Local Service Business Triples Leads with Optimized Google Search Campaign",
+        description: "A fictional plumbing company, 'ProPlumb Solutions,' was getting inconsistent results from their basic Google Ads setup. They restructured their campaigns with tightly themed ad groups for different services (e.g., 'emergency plumbing,' 'drain cleaning,' 'water heater repair'), used specific keywords with appropriate match types, and wrote compelling ad copy highlighting their quick response time and local expertise. They also implemented conversion tracking for calls and form submissions.",
+        outcome: "Within three months of launching the revamped campaigns, ProPlumb Solutions saw a 200% increase in qualified leads from Google Ads, while their Cost Per Lead decreased by 35% due to improved Quality Scores and better targeting. They also identified high-performing keywords and ad copy through consistent monitoring and A/B testing."
+      }
+    ]
   },
   {
     id: 'analytics-ga4-basics-1',
     title: 'Google Analytics 4: Essential Core Metrics & Reports',
-    content: "Google Analytics 4 (GA4) uses an event-based data model. Key metrics include: Users (total distinct users), Sessions (periods of active engagement), Engagement Rate (percentage of engaged sessions), Average Engagement Time per session, Events (user interactions like page_view, click, scroll, file_download), and Conversions (key events you define as valuable). Set up event tracking for important user actions beyond the automatically collected ones (e.g., form submissions, video views). Analyze traffic acquisition reports to understand where your users are coming from (Organic, Direct, Referral, Paid). Use Engagement reports to see which content users interact with most. The Monetization reports (if e-commerce) track revenue and purchase behavior. Use the Exploration hub to build custom reports, funnels, and path explorations for deeper analysis. Understand the differences between GA4 and Universal Analytics if migrating.",
+    content: "Google Analytics 4 (GA4) uses an event-based data model, a significant shift from Universal Analytics. Key metrics include: Users (total distinct users, including active users), Sessions (periods of active engagement, starting with session_start event), Engagement Rate (percentage of engaged sessions – lasting >10s, having 1+ conversion event, or 2+ page_views/screen_views), Average Engagement Time per session, Events (user interactions like page_view, click, scroll, file_download, form_submit), and Conversions (key events you define as valuable, e.g., 'purchase', 'generate_lead'). Set up event tracking for important user actions beyond the automatically collected ones (e.g., specific button clicks, video views, outbound link clicks). Analyze traffic acquisition reports (User acquisition & Traffic acquisition) to understand where your users are coming from (Organic, Direct, Referral, Paid, Email, Social). Use Engagement reports (Pages and screens, Events, Conversions) to see which content users interact with most and how they complete key actions. The Monetization reports (if e-commerce) track revenue and purchase behavior. Use the Exploration hub (free-form, funnel exploration, path exploration) to build custom reports, funnels, and path explorations for deeper analysis. Understand the differences between GA4 and Universal Analytics if migrating, particularly regarding session calculation and event structure.",
     category: 'Analytics',
-    tags: ['ga4', 'google analytics', 'data', 'metrics', 'reporting', 'event tracking'],
-    proTip: "Create custom audiences in GA4 based on specific user behaviors, demographics, or event completions. These audiences can be used for deeper analysis within GA4 or exported to Google Ads for targeted remarketing campaigns, significantly improving ad relevance and ROI. Also, explore the 'Comparisons' feature to segment data directly within standard reports.",
+    tags: ['ga4', 'google analytics', 'data', 'metrics', 'reporting', 'event tracking', 'user engagement'],
+    proTip: "Create custom audiences in GA4 based on specific user behaviors (e.g., viewed specific product category, completed a key event), demographics, or event completions. These audiences can be used for deeper analysis within GA4 (e.g., comparing behavior of different segments) or exported to Google Ads for highly targeted remarketing campaigns, significantly improving ad relevance and ROI. Also, explore the 'Comparisons' feature directly within standard reports to quickly segment data by dimensions like device, country, or traffic source without needing to build a full Exploration.",
     interactiveElements: [
-      { iconName: 'Users', term: 'Users & Sessions', tip: 'Users are unique individuals; Sessions are their periods of activity on your site/app.' },
-      { iconName: 'BarChart2', term: 'Engagement Rate', tip: 'Percentage of sessions that lasted longer than 10 seconds, had a conversion event, or had 2+ page views.' },
-      { iconName: 'MousePointer', term: 'Event Tracking', tip: 'GA4 tracks user interactions as events (e.g., clicks, downloads, video views). Customize these for your needs.' },
-      { iconName: 'Settings2', term: 'Explorations', tip: 'A powerful GA4 feature for creating custom reports, funnels, and segment overlap analysis.'},
-      { iconName: 'Shuffle', term: 'Conversions', tip: 'Key user actions defined as valuable, such as purchases or lead form submissions.'}
+      { iconName: 'Users', term: 'Users & Sessions', tip: 'Users are unique individuals; Sessions are their periods of activity on your site/app. GA4 focuses more on active users.' },
+      { iconName: 'BarChart2', term: 'Engagement Rate', tip: 'Percentage of sessions that lasted longer than 10 seconds, had a conversion event, or had 2+ page views/screen views. Replaces Bounce Rate.' },
+      { iconName: 'MousePointer', term: 'Event Tracking', tip: 'GA4 tracks ALL user interactions as events (e.g., clicks, downloads, video views). Customize these for your needs.' },
+      { iconName: 'Settings2', term: 'Explorations', tip: 'A powerful GA4 feature for creating custom reports, funnels, segment overlap analysis, and user pathing.'},
+      { iconName: 'Shuffle', term: 'Conversions', tip: 'Key user actions (events) you mark as valuable, such as purchases or lead form submissions. Up to 30 per property.'},
+      { iconName: 'Network', term: 'Data Model (Event-based)', tip: 'GA4 collects data as events, unlike Universal Analytics which was session-based. Each interaction is an event.'}
     ],
     imageUrl: 'https://placehold.co/400x250.png?text=GA4+Insights',
+    learningObjectives: [
+      "Understand the event-based data model of Google Analytics 4.",
+      "Identify and interpret key metrics in GA4 (Users, Sessions, Engagement Rate, Events, Conversions).",
+      "Learn how to navigate standard reports for traffic acquisition, engagement, and monetization.",
+      "Recognize the importance of custom event tracking for specific business goals.",
+      "Understand the basics of using Explorations for custom analysis and audience creation."
+    ],
+    keyTakeaways: [
+      "GA4's event-based model offers more flexible and detailed user interaction tracking.",
+      "Engagement Rate is a key metric replacing Bounce Rate, focusing on meaningful interactions.",
+      "Customizing event tracking and marking key events as conversions are crucial for useful data.",
+      "Explorations provide powerful tools for deep-dive analysis beyond standard reports.",
+      "Understanding data streams and the new interface is essential for effective GA4 usage."
+    ],
+    quiz: [
+      {
+        question: "What is the primary data collection model used by Google Analytics 4 (GA4)?",
+        options: [
+          "Session-based model",
+          "Hit-based model",
+          "Event-based model",
+          "Pageview-based model"
+        ],
+        correctAnswerIndex: 2,
+        explanation: "GA4 uses an event-based data model, where every user interaction (like a page view, click, or scroll) is captured as an event."
+      },
+      {
+        question: "Which GA4 metric largely replaces 'Bounce Rate' from Universal Analytics?",
+        options: [
+          "Average Session Duration",
+          "Engagement Rate",
+          "Exit Rate",
+          "New Users"
+        ],
+        correctAnswerIndex: 1,
+        explanation: "Engagement Rate in GA4 measures the percentage of sessions that were engaged (lasted over 10s, had a conversion, or 2+ pageviews), providing a more nuanced view than Bounce Rate."
+      },
+      {
+        question: "What is the 'Explorations' hub in GA4 primarily used for?",
+        options: [
+            "Setting up property-level configurations.",
+            "Viewing standard, pre-built reports only.",
+            "Creating custom reports, funnel analyses, and path explorations for deeper data insights.",
+            "Managing user access and permissions."
+        ],
+        correctAnswerIndex: 2,
+        explanation: "The Explorations hub allows users to perform advanced data analysis, build custom visualizations, and uncover deeper insights that are not available in the standard reports."
+      }
+    ],
+    caseStudies: [
+      {
+        title: "E-commerce Site Identifies Checkout Bottleneck Using GA4 Funnel Exploration",
+        description: "An online store, 'FashionForward Finds,' noticed a high cart abandonment rate but wasn't sure where users were dropping off in the checkout process. They set up a custom funnel exploration in GA4 tracking steps from 'view_cart' to 'begin_checkout,' 'add_shipping_info,' 'add_payment_info,' and finally 'purchase.'",
+        outcome: "The GA4 funnel report clearly showed a significant 60% drop-off at the 'add_shipping_info' step. Upon investigation, they found their shipping form was confusing and had too many fields, especially on mobile. After simplifying the form and improving its mobile layout, the drop-off rate at that step decreased to 20%, leading to a 15% overall increase in completed purchases within a month."
+      }
+    ]
   },
   {
     id: 'seo-onpage-1',
     title: 'Advanced On-Page SEO Checklist',
-    content: "Effective on-page SEO goes beyond keywords. Optimize title tags (under 60 characters, include primary keyword, compelling). Craft compelling meta descriptions (under 160 characters, include CTA, keyword). Use header tags (H1 for main title, H2s for subheadings with secondary keywords) to structure content logically. Integrate keywords naturally within your content, avoiding keyword stuffing; focus on semantic relevance. Optimize images: use descriptive filenames, provide concise alt text for accessibility and SEO, and compress images for fast loading using modern formats like WebP. Ensure fast page load speed (check with PageSpeed Insights, aim for good Core Web Vitals). Implement internal linking, connecting relevant pages within your site to distribute link equity and improve navigation. Use structured data markup (Schema.org) to help search engines understand your content better and enable rich snippets (e.g., FAQ, HowTo, Product).",
+    content: "Effective on-page SEO goes beyond just keywords; it's about optimizing all elements of a page for users and search engines. Optimize title tags (under 60 characters, include primary keyword near the beginning, compelling and unique). Craft compelling meta descriptions (under 160 characters, include CTA, keyword, accurately summarize page content – while not a direct ranking factor, it impacts CTR). Use header tags (H1 for main title – only one per page, H2s for subheadings with secondary keywords/related terms) to structure content logically and improve readability. Integrate keywords naturally within your content, focusing on semantic relevance, LSI keywords, and user intent rather than keyword stuffing. Optimize images: use descriptive, keyword-rich filenames (e.g., 'blue-running-shoes.jpg'), provide concise and descriptive alt text for accessibility and SEO, compress images for fast loading using modern formats like WebP, and consider image sitemaps. Ensure fast page load speed (check with PageSpeed Insights, aim for good Core Web Vitals – LCP, FID/INP, CLS). Implement internal linking strategically, connecting relevant pages within your site to distribute link equity, improve navigation, and help search engines understand content relationships. Use structured data markup (Schema.org) to help search engines understand your content better and enable rich snippets (e.g., FAQ, HowTo, Product, Article, LocalBusiness) in SERPs. Ensure your content is original, high-quality, and provides substantial value to the user.",
     category: 'SEO',
-    tags: ['seo', 'on-page', 'optimization', 'website', 'technical seo', 'schema'],
-    proTip: "Prioritize user experience (UX). Google's ranking algorithms increasingly favor sites that offer a great user experience. This includes mobile-friendliness (responsive design), fast load times, intuitive navigation, and high-quality, engaging content that satisfies search intent. A good UX often leads to lower bounce rates and longer dwell times, which are positive ranking signals. Ensure your site is mobile-first indexed and easily crawlable by search engines.",
+    tags: ['seo', 'on-page', 'optimization', 'website', 'technical seo', 'schema', 'core web vitals'],
+    proTip: "Prioritize user experience (UX) and content depth. Google's ranking algorithms increasingly favor sites that offer a great user experience and comprehensive, authoritative content that fully satisfies search intent. This includes mobile-friendliness (responsive design), fast load times, intuitive navigation, clear CTAs, and high-quality, engaging content that answers user questions thoroughly. A good UX often leads to lower bounce rates and longer dwell times, which are positive ranking signals. Ensure your site is mobile-first indexed and easily crawlable by search engines by checking your robots.txt and XML sitemap.",
     interactiveElements: [
-      { iconName: 'Type', term: 'Title Tags & Meta Descriptions', tip: 'Crucial for CTR from SERPs. Make them compelling and keyword-rich.' },
-      { iconName: 'Image', term: 'Image Optimization', tip: 'Use descriptive alt text for all images and compress them to improve page speed.' },
-      { iconName: 'Link', term: 'Internal Linking', tip: 'Connect related content on your site to help users and search engines navigate and distribute authority.' },
+      { iconName: 'Type', term: 'Title Tags & Meta Descriptions', tip: 'Crucial for CTR from SERPs. Make them compelling, unique, and keyword-rich. Title tag is a direct ranking factor.' },
+      { iconName: 'Image', term: 'Image Optimization', tip: 'Use descriptive alt text for all images, compress them, use modern formats, and relevant filenames.' },
+      { iconName: 'Link', term: 'Internal Linking', tip: 'Connect related content on your site to help users and search engines navigate, discover content, and distribute authority.' },
       { iconName: 'Smartphone', term: 'Mobile-Friendliness', tip: 'Essential for modern SEO as Google uses mobile-first indexing. Test with Google\'s Mobile-Friendly Test.'},
-      { iconName: 'Zap', term: 'Page Speed (Core Web Vitals)', tip: 'Fast loading times are critical for user experience and SEO. LCP, FID, CLS are key metrics.'}
+      { iconName: 'Zap', term: 'Page Speed (Core Web Vitals)', tip: 'Fast loading times are critical for user experience and SEO. LCP, INP (replacing FID), CLS are key metrics.'},
+      { iconName: 'Code', term: 'Structured Data (Schema.org)', tip: 'Markup that helps search engines understand content context, enabling rich snippets and enhancing visibility.'}
     ],
     imageUrl: 'https://placehold.co/400x250.png?text=On-Page+Mastery',
+    learningObjectives: [
+        "Understand the key elements of on-page SEO beyond basic keyword insertion.",
+        "Learn to optimize title tags, meta descriptions, and header tags effectively.",
+        "Grasp techniques for image optimization and its impact on SEO and UX.",
+        "Recognize the importance of page speed, Core Web Vitals, and mobile-friendliness.",
+        "Learn about internal linking strategies and the role of structured data (Schema.org)."
+    ],
+    keyTakeaways: [
+        "On-page SEO involves optimizing content structure, HTML elements, and user experience.",
+        "Title tags, meta descriptions, and headers are critical for search visibility and user engagement.",
+        "Image optimization, page speed, and mobile-friendliness directly impact rankings and UX.",
+        "Strategic internal linking distributes link equity and improves site navigation.",
+        "Structured data helps search engines understand content better and can lead to rich snippets."
+    ],
+    quiz: [
+        {
+            question: "What is the primary purpose of 'alt text' for images in on-page SEO?",
+            options: [
+                "To make images load faster",
+                "To provide a text alternative for search engines and visually impaired users",
+                "To automatically copyright the image",
+                "To add a border around the image"
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Alt text (alternative text) describes an image for search engine crawlers and for users who cannot see the image (e.g., due to visual impairment or if the image fails to load)."
+        },
+        {
+            question: "Which of the following is a key component of Google's Core Web Vitals?",
+            options: [
+                "Keyword Density",
+                "Largest Contentful Paint (LCP)",
+                "Number of External Links",
+                "Domain Authority"
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Largest Contentful Paint (LCP) is one of the three Core Web Vitals, measuring perceived load speed. The others are Interaction to Next Paint (INP) and Cumulative Layout Shift (CLS)."
+        },
+        {
+            question: "Why is internal linking important for SEO?",
+            options: [
+                "It's the only way to get backlinks.",
+                "It helps distribute link equity (ranking power) throughout your site and improves crawlability.",
+                "It increases the number of pages on your website.",
+                "It automatically generates an XML sitemap."
+            ],
+            correctAnswerIndex: 1,
+            explanation: "Internal links connect your content and give Google an idea of the structure of your website. They can help spread link equity (ranking power) around your website and help search engines find and index all of your site's pages."
+        }
+    ],
+    caseStudies: [
+        {
+            title: "Blog Achieves Top Rankings by Optimizing On-Page Elements & UX",
+            description: "A travel blog, 'Wanderlust Ways,' had great content but struggled to rank for competitive keywords. They conducted an on-page SEO audit, focusing on optimizing title tags and meta descriptions for CTR, improving content structure with H2/H3 tags, compressing images and implementing WebP, improving internal linking to pillar posts, and adding FAQ schema to relevant articles.",
+            outcome: "Within four months, 'Wanderlust Ways' saw a 70% increase in organic traffic. Several key articles achieved top 3 rankings for their target keywords, and click-through rates from search results improved by an average of 25%. Their Core Web Vitals scores also significantly improved, leading to better user engagement metrics like reduced bounce rate."
+        }
+    ]
   },
   {
     id: 'social-media-content-calendar-1',
     title: 'Strategic Social Media Content Calendar',
-    content: "A content calendar is vital for consistent and effective social media marketing. Plan your posts weeks or even months in advance. Identify key content pillars or themes relevant to your audience and brand. Map out content for specific campaigns, holidays, or events. Schedule posts for optimal times when your audience is most active (use platform analytics to determine this). Use tools like Buffer, Hootsuite, Sprout Social, or even a simple spreadsheet/Airtable. Mix content types: educational posts, behind-the-scenes, user-generated content, promotions, questions, videos, images, and stories. Don't forget to allocate time for spontaneous, real-time engagement and community management. Include a process for content approval if working in a team.",
+    content: "A content calendar is vital for consistent and effective social media marketing. Plan your posts weeks or even months in advance, especially for major campaigns or evergreen content. Identify key content pillars or themes relevant to your audience and brand – these are the core topics you'll consistently talk about. Map out content for specific campaigns, holidays, product launches, or industry events. Schedule posts for optimal times when your audience is most active (use platform analytics to determine this for each specific platform). Use tools like Buffer, Hootsuite, Sprout Social, Agorapulse, or even a simple spreadsheet/Airtable/Notion. Mix content types: educational posts (how-tos, tips), behind-the-scenes glimpses, user-generated content (UGC), promotions/offers, questions to spark engagement, videos (short-form, long-form), images, stories, live sessions. Don't forget to allocate time for spontaneous, real-time engagement, trend-jacking (if appropriate for your brand), and community management. Include a process for content creation, review, and approval if working in a team. Regularly revisit and update your calendar based on performance and emerging opportunities.",
     category: 'Social Media',
-    tags: ['social media', 'content strategy', 'planning', 'schedule', 'organization'],
-    proTip: "Regularly analyze your social media performance (reach, engagement, clicks, conversions) for different content types and posting times. Use these insights to refine your content calendar, doubling down on what works best and experimenting with new approaches for underperforming areas. Your calendar should be a living document, adaptable to current trends and audience feedback. Also, batch create content to save time.",
+    tags: ['social media', 'content strategy', 'planning', 'schedule', 'organization', 'content pillars'],
+    proTip: "Regularly analyze your social media performance (reach, engagement, clicks, conversions) for different content types, themes, and posting times. Use these insights to refine your content calendar, doubling down on what works best and experimenting with new approaches for underperforming areas. Your calendar should be a living document, adaptable to current trends and audience feedback. Also, batch create content (e.g., film multiple short videos in one session, design several graphics at once) to save time and maintain a consistent aesthetic. Use a content ratio like 80/20 (80% value/engagement, 20% promotional) to avoid fatiguing your audience with too many sales pitches.",
     interactiveElements: [
-      { iconName: 'CalendarDays', term: 'Planning Ahead', tip: 'Scheduling content saves time and ensures a consistent presence.' },
-      { iconName: 'ListChecks', term: 'Content Pillars', tip: 'Core topics or themes your content will revolve around, ensuring brand consistency.' },
-      { iconName: 'Share2', term: 'Content Mix', tip: 'Vary your content types (e.g., informational, entertaining, promotional) to keep your audience engaged.' },
-      { iconName: 'PieChart', term: 'Performance Analysis', tip: 'Use analytics to see which posts perform best and adjust your strategy accordingly.'},
-      { iconName: 'Clock', term: 'Optimal Posting Times', tip: 'Analyze your audience activity to schedule posts when they are most likely to see and engage with them.'}
+      { iconName: 'CalendarDays', term: 'Planning Ahead', tip: 'Scheduling content saves time, ensures a consistent presence, and helps align with marketing goals.' },
+      { iconName: 'ListChecks', term: 'Content Pillars', tip: 'Core topics or themes your content will revolve around, ensuring brand consistency and relevance.' },
+      { iconName: 'Share2', term: 'Content Mix/Ratio', tip: 'Vary your content types (e.g., informational, entertaining, promotional) and maintain a healthy balance to keep your audience engaged.' },
+      { iconName: 'PieChart', term: 'Performance Analysis', tip: 'Use analytics to see which posts perform best (engagement, reach, clicks) and adjust your strategy accordingly.'},
+      { iconName: 'Clock', term: 'Optimal Posting Times', tip: 'Analyze your audience activity on each platform to schedule posts when they are most likely to see and engage with them.'},
+      { iconName: 'Users', term: 'Audience Understanding', tip: 'Deeply understand your target audience\'s needs, interests, and pain points to create content that resonates.'}
     ],
     imageUrl: 'https://placehold.co/400x250.png?text=Social+Content+Plan',
+    learningObjectives: [
+        "Understand the importance of a content calendar for social media success.",
+        "Learn how to define content pillars and themes for brand consistency.",
+        "Identify different content types and the importance of a balanced content mix.",
+        "Recognize strategies for scheduling posts at optimal times.",
+        "Learn how to use analytics to refine and adapt the content calendar."
+    ],
+    keyTakeaways: [
+        "A content calendar is essential for organized, consistent, and strategic social media posting.",
+        "Content pillars provide a framework for relevant and on-brand content creation.",
+        "A diverse mix of content types keeps audiences engaged and caters to different preferences.",
+        "Scheduling posts based on audience activity maximizes reach and engagement.",
+        "Regularly analyzing performance data is crucial for optimizing the content calendar and strategy."
+    ],
+    quiz: [
+        {
+            question: "What are 'content pillars' in a social media strategy?",
+            options: [
+                "The most popular social media platforms",
+                "Specific tools used for scheduling posts",
+                "Core themes or topics that guide content creation",
+                "The physical structures used for marketing events"
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Content pillars are broad themes or topics that your brand will consistently create content about, helping to maintain focus and relevance."
+        },
+        {
+            question: "Why is it important to mix content types in a social media calendar?",
+            options: [
+                "To confuse the platform algorithms",
+                "To make the calendar look more complex",
+                "To cater to different audience preferences and keep content fresh and engaging",
+                "To use up the marketing budget faster"
+            ],
+            correctAnswerIndex: 2,
+            explanation: "Varying content types (e.g., images, videos, articles, stories) helps maintain audience interest, appeals to different ways people consume information, and can improve overall engagement."
+        },
+        {
+            question: "What is a common recommended content ratio (e.g., value vs. promotional)?",
+            options: [
+                "10% value / 90% promotional",
+                "50% value / 50% promotional",
+                "80% value / 20% promotional",
+                "0% value / 100% promotional"
+            ],
+            correctAnswerIndex: 2,
+            explanation: "The 80/20 rule (or similar ratios like 70/30) suggests that the majority of your content should provide value (educational, entertaining, engaging) and a smaller portion should be promotional to avoid alienating your audience."
+        }
+    ],
+    caseStudies: [
+        {
+            title: "Tech Startup Increases Engagement by Implementing Themed Content Calendar",
+            description: "A B2B tech startup, 'InnovateSoft,' was posting sporadically on LinkedIn without a clear strategy, resulting in low engagement. They developed a content calendar based on three content pillars: 'Future of AI,' 'Productivity Hacks with Our Software,' and 'Customer Success Stories.' They planned a mix of articles, short video demos, and Q&A live sessions.",
+            outcome: "After three months of consistent posting based on their new calendar, InnovateSoft saw a 120% increase in average post engagement, a 50% growth in Company Page followers, and a notable rise in demo requests originating from LinkedIn. Their content became more focused, predictable, and valuable to their target audience."
+        }
+    ]
   },
   {
     id: 'email-marketing-automation-1',
