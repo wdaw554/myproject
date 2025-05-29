@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#FF8C00" /> {/* PWA theme color */}
+        <meta name="theme-color" content="#4062d1" /> {/* PWA theme color updated to blue */}
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ClientProviders>

@@ -4,8 +4,8 @@
   "description": "200+ in-app marketing hacks. Learn SEO, ads, and social media – no downloads, no BS!",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFF2E0",
-  "theme_color": "#FF8C00",
+  "background_color": "#f2f8ff",
+  "theme_color": "#4062d1",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
