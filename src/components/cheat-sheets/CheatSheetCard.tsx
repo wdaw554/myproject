@@ -91,20 +91,19 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   const secondTag = sheet.category?.split(' ')[0].toLowerCase() || 'strategy';
   const aiHint = `${firstTag} ${secondTag}`.trim();
 
-  const imageSrc = sheet.imageUrl || `https://placehold.co/400x250.png`;
-
-
   return (
     <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-      <div className="relative w-full h-40 md:h-48">
-        <Image 
-          src={imageSrc}
-          alt={sheet.title} 
-          layout="fill" 
-          objectFit="cover" 
-          data-ai-hint={aiHint}
-        />
-      </div>
+      {sheet.imageUrl && (
+        <div className="relative w-full h-40 md:h-48">
+          <Image 
+            src={sheet.imageUrl}
+            alt={sheet.title} 
+            layout="fill" 
+            objectFit="cover" 
+            data-ai-hint={aiHint}
+          />
+        </div>
+      )}
       <CardHeader className="pt-4 pb-2">
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl font-semibold leading-tight">{sheet.title}</CardTitle>
@@ -204,6 +203,9 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                                 <ul className="list-disc list-inside space-y-1 mt-1 text-xs text-foreground/70">
                                     {q.options.map((opt, idx) => <li key={idx}>{opt}</li>)}
                                 </ul>
+                                {q.explanation && (
+                                  <p className="text-xs mt-1 text-primary/80"><i>Explanation: {q.explanation}</i></p>
+                                )}
                             </div>
                         ))}
                         <p className="text-center text-muted-foreground text-xs italic mt-2">Interactive quizzes coming soon!</p>
@@ -276,3 +278,4 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     </Card>
   );
 }
+

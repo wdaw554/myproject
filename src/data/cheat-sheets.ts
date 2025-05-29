@@ -17,7 +17,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Users', term: 'Competitor Analysis', tip: 'Analyze keywords your competitors rank for to find opportunities you might be missing.'},
       { iconName: 'Link', term: 'Long-Tail Keywords', tip: 'More specific, multi-word phrases that often indicate higher purchase intent and have lower competition.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Deep+Keyword+Dive',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Deep+Keyword+Dive',
     learningObjectives: [
       "Understand the importance of keyword research in SEO.",
       "Learn methods for discovering relevant keywords using various tools.",
@@ -75,7 +75,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Repeat', term: 'User-Generated Content (UGC)', tip: 'Content created by your audience featuring your brand. Highly authentic and builds trust.'},
       { iconName: 'Layers', term: 'Carousel Posts', tip: 'Use multiple images or videos in one post to tell a story or provide more detailed information.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Insta+Engagement+Pro',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Insta+Engagement+Pro',
     learningObjectives: [
         "Identify various methods to increase Instagram engagement.",
         "Understand the role of different Instagram features (Stories, Reels, Live, Carousels, Guides).",
@@ -133,7 +133,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'ChevronsRight', term: 'Exit-Intent Popups', tip: 'Popups that appear when a user shows intent to leave your website, offering a last chance to convert them.'},
       { iconName: 'Users', term: 'List Segmentation', tip: 'Dividing your email list into smaller groups based on shared characteristics for more targeted messaging.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Grow+Email+List',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Grow+Email+List',
      learningObjectives: [
       "Understand various techniques for building an email list effectively.",
       "Learn how to create compelling lead magnets and strategically place CTAs.",
@@ -191,7 +191,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Group', term: 'Ad Groups', tip: 'Organize your campaign with tightly themed ad groups, each containing relevant keywords and ads for higher Quality Scores.'},
       { iconName: 'Type', term: 'Responsive Search Ads (RSAs)', tip: 'Provide multiple headlines and descriptions; Google AI tests combinations to find the best performers.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Google+Ads+Setup',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Google+Ads+Setup',
     learningObjectives: [
       "Understand the fundamental steps to set up a Google Ads campaign.",
       "Learn to define campaign goals and select appropriate campaign types.",
@@ -264,7 +264,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Shuffle', term: 'Conversions', tip: 'Key user actions (events) you mark as valuable, such as purchases or lead form submissions. Up to 30 per property.'},
       { iconName: 'Network', term: 'Data Model (Event-based)', tip: 'GA4 collects data as events, unlike Universal Analytics which was session-based. Each interaction is an event.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=GA4+Insights',
+    // imageUrl: 'https://placehold.co/400x250.png?text=GA4+Insights',
     learningObjectives: [
       "Understand the event-based data model of Google Analytics 4.",
       "Identify and interpret key metrics in GA4 (Users, Sessions, Engagement Rate, Events, Conversions).",
@@ -337,7 +337,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Zap', term: 'Page Speed (Core Web Vitals)', tip: 'Fast loading times are critical for user experience and SEO. LCP, INP (replacing FID), CLS are key metrics.'},
       { iconName: 'Code', term: 'Structured Data (Schema.org)', tip: 'Markup that helps search engines understand content context, enabling rich snippets and enhancing visibility.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=On-Page+Mastery',
+    // imageUrl: 'https://placehold.co/400x250.png?text=On-Page+Mastery',
     learningObjectives: [
         "Understand the key elements of on-page SEO beyond basic keyword insertion.",
         "Learn to optimize title tags, meta descriptions, and header tags effectively.",
@@ -410,7 +410,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Clock', term: 'Optimal Posting Times', tip: 'Analyze your audience activity on each platform to schedule posts when they are most likely to see and engage with them.'},
       { iconName: 'Users', term: 'Audience Understanding', tip: 'Deeply understand your target audience\'s needs, interests, and pain points to create content that resonates.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Social+Content+Plan',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Social+Content+Plan',
     learningObjectives: [
         "Understand the importance of a content calendar for social media success.",
         "Learn how to define content pillars and themes for brand consistency.",
@@ -482,7 +482,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'RefreshCw', term: 'Re-engagement', tip: 'Campaigns designed to reactivate subscribers who haven\'t interacted with your emails recently.'},
       { iconName: 'UserCheck', term: 'Personalization', tip: 'Using subscriber data to tailor email content, making it more relevant and effective.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Automated+Emails',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Automated+Emails',
   },
   {
     id: 'paid-ads-facebook-1',
@@ -498,7 +498,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Layers', term: 'Audience Layering', tip: 'Combine multiple targeting criteria (e.g., interests AND behaviors OR multiple interests) to create a more specific audience.'},
       { iconName: 'FileBarChart', term: 'Campaign Objectives', tip: 'Choose the right objective (e.g., awareness, traffic, conversions) to align with your goals and Facebook\'s optimization.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Facebook+Targeting',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Facebook+Targeting',
   },
   {
     id: 'analytics-kpi-1',
@@ -514,7 +514,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Gauge', term: 'Dashboards', tip: 'Visual tools that display your most important KPIs in one place for easy monitoring and reporting.'},
       { iconName: 'Lightbulb', term: 'Actionable Metrics', tip: 'Metrics that provide insights you can act upon to improve performance, unlike vanity metrics.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Marketing+KPIs',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Marketing+KPIs',
   },
   {
     id: 'seo-link-building-1',
@@ -530,7 +530,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Anchor', term: 'Anchor Text', tip: 'The clickable text of a hyperlink. Strive for natural and varied anchor text.'},
       { iconName: 'FilePieChart', term: 'Content for Links (Link Bait)', tip: 'Creating exceptional content (data, tools, guides) specifically designed to attract backlinks.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Link+Building+Tactics',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Link+Building+Tactics',
   },
   {
     id: 'social-media-linkedin-1',
@@ -546,7 +546,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Newspaper', term: 'Native Articles', tip: 'Publish long-form content directly on LinkedIn to position yourself as a thought leader and engage prospects.'},
       { iconName: 'Network', term: 'LinkedIn Groups', tip: 'Participate in relevant industry groups to share insights, ask questions, and connect with peers.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=LinkedIn+for+B2B',
+    // imageUrl: 'https://placehold.co/400x250.png?text=LinkedIn+for+B2B',
   },
   {
     id: 'email-marketing-subject-lines-1',
@@ -562,7 +562,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Smile', term: 'Emojis', tip: 'Can help your subject line stand out, but use them relevantly and test their appearance on various clients.'},
       { iconName: 'BarChart', term: 'A/B Testing', tip: 'Test different subject lines on a small segment of your list before sending to everyone to optimize open rates.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Catchy+Subjects',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Catchy+Subjects',
   },
   {
     id: 'paid-ads-budget-optimization-1',
@@ -578,7 +578,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Sliders', term: 'Budget Allocation', tip: 'Shift budget towards your best-performing campaigns, ad groups, keywords, or audiences.'},
       { iconName: 'Brain', term: 'Bidding Strategies', tip: 'Choose from manual or automated bidding options based on your goals and control preferences.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Optimize+Ad+Budget',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Optimize+Ad+Budget',
   },
   {
     id: 'analytics-conversion-tracking-1',
@@ -594,7 +594,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Link2', term: 'UTM Parameters', tip: 'Tags added to URLs to track the source, medium, and campaign name of your website traffic for accurate attribution.'},
       { iconName: 'TestTube2', term: 'Testing Tracking', tip: 'Always verify your conversion tracking is working correctly after setup or changes.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Track+Conversions',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Track+Conversions',
   },
    {
     id: 'content-marketing-strategy-1',
@@ -610,7 +610,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'BookOpen', term: 'Pillar Content', tip: 'A substantial piece of content covering a core topic, acting as a central hub for related subtopics.'},
       { iconName: 'TrendingUp', term: 'Content KPIs', tip: 'Metrics like traffic, engagement, leads, and conversions used to measure content effectiveness.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Content+Strategy+Hub',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Content+Strategy+Hub',
   },
   {
     id: 'social-media-tiktok-1',
@@ -626,7 +626,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Users', term: 'Creator Collaborations', tip: 'Partnering with TikTok influencers can introduce your brand to their engaged followers authentically.'},
       { iconName: 'Sparkles', term: 'Hook/First 3 Seconds', tip: 'Capture attention immediately to prevent users from scrolling past your video.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=TikTok+Growth+Hacks',
+    // imageUrl: 'https://placehold.co/400x250.png?text=TikTok+Growth+Hacks',
   },
   {
     id: 'email-marketing-segmentation-1',
@@ -642,7 +642,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'History', term: 'Purchase History', tip: 'Segmenting based on what and how often customers buy to send relevant offers and recommendations.'},
       { iconName: 'Map', term: 'Behavioral Segmentation', tip: 'Grouping users based on actions they take (or don\'t take) on your website or with your emails.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Email+Segmentation+Pro',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Email+Segmentation+Pro',
   },
   {
     id: 'paid-ads-retargeting-1',
@@ -658,7 +658,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'EyeOff', term: 'Frequency Caps', tip: 'Limit how many times a user sees your retargeting ad in a given period to prevent ad fatigue.'},
       { iconName: 'Layers', term: 'Sequential Retargeting', tip: 'Show a series of different ads over time to guide users through the funnel.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Retargeting+Mastery',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Retargeting+Mastery',
   },
   {
     id: 'analytics-funnel-analysis-1',
@@ -674,7 +674,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Route', term: 'User Journey Mapping', tip: 'Visually outline the steps customers take from first interaction to conversion to understand their experience.'},
       { iconName: 'BarChartHorizontal', term: 'Segmented Analysis', tip: 'Analyze funnel performance for different user groups (e.g., by traffic source, device).'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Funnel+Optimization',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Funnel+Optimization',
   },
   // NEW CHEAT SHEETS START HERE
   {
@@ -691,7 +691,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Building', term: 'Location Pages', tip: 'If you have multiple physical locations, create unique, optimized pages for each on your website, including local schema.'},
       { iconName: 'MessageSquare', term: 'Google Posts', tip: 'Mini-updates, offers, or event announcements you can publish directly to your GBP listing.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Local+SEO+Boost',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Local+SEO+Boost',
      learningObjectives: [
       "Understand the key components of Local SEO.",
       "Learn how to optimize a Google Business Profile effectively.",
@@ -740,7 +740,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'ThumbsUp', term: 'Call to Action (CTA)', tip: 'Tell viewers what to do next (e.g., subscribe, visit website, comment, download a resource).'},
       { iconName: 'Activity', term: 'Video Analytics', tip: 'Track metrics like view duration, audience retention, and click-through rates to optimize content.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Video+Strategy+Pro',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Video+Strategy+Pro',
   },
   {
     id: 'email-marketing-deliverability-1',
@@ -756,7 +756,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Thermometer', term: 'IP Warm-up', tip: 'Gradually increasing send volume from a new IP address or domain to build a positive sender reputation with ISPs.'},
       { iconName: 'Activity', term: 'Engagement Metrics', tip: 'High opens and clicks signal to ISPs that your emails are wanted, improving deliverability.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Email+Inbox+Success',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Email+Inbox+Success',
   },
   {
     id: 'paid-ads-quality-score-1',
@@ -772,7 +772,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'ArrowUpRightSquare', term: 'Ad Rank', tip: 'Determines your ad position. Calculated as: Max CPC Bid x Quality Score (+ Ad Extension impact & other factors).'},
       { iconName: 'Sparkles', term: 'Keyword-Ad-Landing Page Alignment', tip: 'Ensure a strong, consistent message from keyword to ad copy to landing page content.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=Quality+Score+Tips',
+    // imageUrl: 'https://placehold.co/400x250.png?text=Quality+Score+Tips',
   },
   {
     id: 'analytics-ab-testing-1',
@@ -788,6 +788,7 @@ export const CHEAT_SHEETS_DATA: CheatSheet[] = [
       { iconName: 'Percent', term: 'Statistical Significance', tip: 'Ensures that the observed difference between variations is likely not due to random chance (typically aiming for 95% confidence).'},
       { iconName: 'ClipboardList', term: 'Documentation', tip: 'Keep detailed records of your tests, hypotheses, results, and learnings for future reference.'}
     ],
-    imageUrl: 'https://placehold.co/400x250.png?text=A/B+Testing+Guide',
+    // imageUrl: 'https://placehold.co/400x250.png?text=A/B+Testing+Guide',
   }
 ];
+
