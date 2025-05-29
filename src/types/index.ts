@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 
 export type Category = 'Social Media' | 'SEO' | 'Email Marketing' | 'Paid Advertising' | 'Analytics';
@@ -6,6 +7,19 @@ export interface InteractiveElement {
   iconName: keyof typeof import('lucide-react')['icons']; // Store icon name
   term: string;
   tip: string;
+}
+
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  correctAnswerIndex: number;
+  explanation?: string; // Optional explanation for the correct answer
+}
+
+export interface CaseStudy {
+  title: string;
+  description: string; // A paragraph describing the fictional case
+  outcome: string; // What was the result
 }
 
 export interface CheatSheet {
@@ -19,6 +33,10 @@ export interface CheatSheet {
   interactiveElements?: InteractiveElement[];
   isBookmarked?: boolean;
   imageUrl?: string; // Optional field for custom image URLs
+  learningObjectives?: string[];
+  keyTakeaways?: string[];
+  quiz?: QuizQuestion[];
+  caseStudies?: CaseStudy[];
 }
 
 export type UserTier = 'free' | 'premium';
