@@ -57,8 +57,8 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   };
 
   const handleUnlockProTipAttempt = () => {
-    if (userTier === 'premium') { // Should not happen as button is hidden, but good check
-      unlockProTipWithToken(sheet.id); // Will auto-unlock without token cost
+    if (userTier === 'premium') { 
+      unlockProTipWithToken(sheet.id); 
       toast({ title: "Pro Tip Unlocked!", description: "Premium members have all tips unlocked." });
       setIsAlertOpen(false);
       return;
@@ -67,20 +67,19 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     if (proTipUnlockTokens > 0) {
       const success = unlockProTipWithToken(sheet.id);
       if (success) {
-        toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens - 1}` });
+        toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens}` }); // proTipUnlockTokens is already updated in context by this point
       } else {
-        // This case should ideally not be reached if button is disabled, but defensive
         toast({ title: "Unlock Failed", description: "Something went wrong.", variant: "destructive" });
       }
     } else {
-      // This state should be handled by the dialog content changing
       toast({ title: "No Tokens Left", description: "Claim your daily reward or go premium!", variant: "destructive" });
     }
     setIsAlertOpen(false);
   };
   
-  const firstTag = sheet.tags?.[0] || 'marketing';
-  const secondTag = sheet.category?.split(' ')[0].toLowerCase() || 'abstract';
+  const firstTag = sheet.tags?.[0]?.split(' ')[0].toLowerCase() || 'marketing';
+  const secondTag = sheet.category?.split(' ')[0].toLowerCase() || 'strategy';
+  const aiHint = `${firstTag} ${secondTag}`.trim();
 
 
   return (
@@ -91,7 +90,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
           alt={sheet.title} 
           layout="fill" 
           objectFit="cover" 
-          data-ai-hint={`${firstTag} ${secondTag}`}
+          data-ai-hint={aiHint}
         />
       </div>
       <CardHeader className="pt-4">

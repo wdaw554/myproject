@@ -29,10 +29,10 @@ export const AppContext = createContext<AppContextProps | undefined>(undefined);
 const BOOKMARKS_STORAGE_KEY = 'marketmuse_bookmarks';
 const THEME_STORAGE_KEY = 'marketmuse_theme';
 const USER_TIER_STORAGE_KEY = 'marketmuse_user_tier';
-const UNLOCKED_PRO_TIPS_STORAGE_KEY = 'marketmuse_unlocked_pro_tips_v2'; // Added v2 to avoid conflicts
+const UNLOCKED_PRO_TIPS_STORAGE_KEY = 'marketmuse_unlocked_pro_tips_v2'; 
 const PRO_TIP_TOKENS_STORAGE_KEY = 'marketmuse_pro_tip_tokens_v2';
 const LAST_CLAIMED_DATE_STORAGE_KEY = 'marketmuse_last_claimed_date_v2';
-const INITIAL_TOKENS = 5; // Grant 5 tokens to new users
+const INITIAL_TOKENS = 10; // Increased from 5 to 10
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -73,7 +73,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     // Load pro tip tokens
     const storedTokens = localStorage.getItem(PRO_TIP_TOKENS_STORAGE_KEY);
-    setProTipUnlockTokens(storedTokens ? parseInt(storedTokens, 10) : INITIAL_TOKENS);
+    // Check if it's a first-time load (no tokens stored yet)
+    if (storedTokens === null) {
+      setProTipUnlockTokens(INITIAL_TOKENS); // Grant initial tokens
+      localStorage.setItem(PRO_TIP_TOKENS_STORAGE_KEY, INITIAL_TOKENS.toString());
+    } else {
+      setProTipUnlockTokens(parseInt(storedTokens, 10));
+    }
+    
 
     // Load last claimed date
     const storedLastClaimedDate = localStorage.getItem(LAST_CLAIMED_DATE_STORAGE_KEY);
@@ -163,7 +170,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const claimDailyReward = useCallback(() => {
     if (canClaimDailyReward()) {
-      const tokensToAward = userTier === 'premium' ? 5 : 3; // Premium gets more
+      const tokensToAward = userTier === 'premium' ? 7 : 5; // Premium gets 7, Free gets 5
       setProTipUnlockTokens(prev => prev + tokensToAward);
       setLastClaimedDate(new Date().toISOString().split('T')[0]);
       return { success: true, tokensAwarded: tokensToAward };
