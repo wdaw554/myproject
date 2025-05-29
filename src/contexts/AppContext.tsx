@@ -32,7 +32,7 @@ const USER_TIER_STORAGE_KEY = 'marketmuse_user_tier';
 const UNLOCKED_PRO_TIPS_STORAGE_KEY = 'marketmuse_unlocked_pro_tips_v2'; 
 const PRO_TIP_TOKENS_STORAGE_KEY = 'marketmuse_pro_tip_tokens_v2';
 const LAST_CLAIMED_DATE_STORAGE_KEY = 'marketmuse_last_claimed_date_v2';
-const INITIAL_TOKENS = 10; // Increased from 5 to 10
+const INITIAL_TOKENS = 10; 
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -73,15 +73,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     // Load pro tip tokens
     const storedTokens = localStorage.getItem(PRO_TIP_TOKENS_STORAGE_KEY);
-    // Check if it's a first-time load (no tokens stored yet)
     if (storedTokens === null) {
-      setProTipUnlockTokens(INITIAL_TOKENS); // Grant initial tokens
+      setProTipUnlockTokens(INITIAL_TOKENS); 
       localStorage.setItem(PRO_TIP_TOKENS_STORAGE_KEY, INITIAL_TOKENS.toString());
     } else {
       setProTipUnlockTokens(parseInt(storedTokens, 10));
     }
     
-
     // Load last claimed date
     const storedLastClaimedDate = localStorage.getItem(LAST_CLAIMED_DATE_STORAGE_KEY);
     if (storedLastClaimedDate) setLastClaimedDate(storedLastClaimedDate);
@@ -150,7 +148,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [userTier, unlockedProTips]);
 
   const unlockProTipWithToken = useCallback((cheatSheetId: string): boolean => {
-    if (userTier === 'premium') { // Premium users don't use tokens
+    if (userTier === 'premium') { 
         setUnlockedProTips(prev => new Set(prev).add(cheatSheetId));
         return true;
     }
@@ -163,14 +161,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [proTipUnlockTokens, userTier]);
 
   const canClaimDailyReward = useCallback((): boolean => {
-    if (!isMounted) return false; // Don't allow claim until mounted and date loaded
+    if (!isMounted) return false; 
     const today = new Date().toISOString().split('T')[0];
     return lastClaimedDate !== today;
   }, [lastClaimedDate, isMounted]);
 
   const claimDailyReward = useCallback(() => {
     if (canClaimDailyReward()) {
-      const tokensToAward = userTier === 'premium' ? 7 : 5; // Premium gets 7, Free gets 5
+      const tokensToAward = userTier === 'premium' ? 60 : 50; // Premium gets 60, Free gets 50
       setProTipUnlockTokens(prev => prev + tokensToAward);
       setLastClaimedDate(new Date().toISOString().split('T')[0]);
       return { success: true, tokensAwarded: tokensToAward };
@@ -180,7 +178,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
 
   if (!isMounted) {
-    return null; // Or a loading spinner, to prevent hydration mismatch
+    return null; 
   }
 
   return (
