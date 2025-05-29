@@ -1,21 +1,27 @@
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 "use client";
 
-import type { CheatSheet, UserTier } from '@/types';
+import type { UserTier } from '@/types';
 import React, { createContext, useState, useEffect, useCallback, ReactNode } from 'react';
 
 interface AppContextProps {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
-  bookmarks: string[]; // Stores IDs of bookmarked cheat sheets
+  bookmarks: string[]; 
   addBookmark: (id: string) => void;
   removeBookmark: (id: string) => void;
   isBookmarked: (id: string) => boolean;
   userTier: UserTier;
   setUserTier: (tier: UserTier) => void;
-  unlockProTip: (cheatSheetId: string) => void;
-  isProTipUnlocked: (cheatSheetId:string) => boolean;
-  unlockedProTips: Set<string>; // Set of cheat sheet IDs whose pro tips are unlocked
+  
+  proTipUnlockTokens: number;
+  unlockedProTips: Set<string>;
+  isProTipUnlocked: (cheatSheetId: string) => boolean;
+  unlockProTipWithToken: (cheatSheetId: string) => boolean; // Returns true if successful
+  
+  lastClaimedDate: string | null;
+  canClaimDailyReward: () => boolean;
+  claimDailyReward: () => { success: boolean; tokensAwarded: number };
 }
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -23,24 +29,29 @@ export const AppContext = createContext<AppContextProps | undefined>(undefined);
 const BOOKMARKS_STORAGE_KEY = 'marketmuse_bookmarks';
 const THEME_STORAGE_KEY = 'marketmuse_theme';
 const USER_TIER_STORAGE_KEY = 'marketmuse_user_tier';
-const UNLOCKED_PRO_TIPS_STORAGE_KEY = 'marketmuse_unlocked_pro_tips';
+const UNLOCKED_PRO_TIPS_STORAGE_KEY = 'marketmuse_unlocked_pro_tips_v2'; // Added v2 to avoid conflicts
+const PRO_TIP_TOKENS_STORAGE_KEY = 'marketmuse_pro_tip_tokens_v2';
+const LAST_CLAIMED_DATE_STORAGE_KEY = 'marketmuse_last_claimed_date_v2';
+const INITIAL_TOKENS = 5; // Grant 5 tokens to new users
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [userTier, setUserTierState] = useState<UserTier>('free');
   const [unlockedProTips, setUnlockedProTips] = useState<Set<string>>(new Set());
+  const [proTipUnlockTokens, setProTipUnlockTokens] = useState<number>(INITIAL_TOKENS);
+  const [lastClaimedDate, setLastClaimedDate] = useState<string | null>(null);
+  
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    // Load theme from localStorage
+    // Load theme
     const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) as 'light' | 'dark' | null;
     if (storedTheme) {
       setTheme(storedTheme);
       document.documentElement.classList.toggle('dark', storedTheme === 'dark');
     } else {
-      // Default to light theme or system preference if needed
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       const initialTheme = prefersDark ? 'dark' : 'light';
       setTheme(initialTheme);
@@ -48,23 +59,25 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       localStorage.setItem(THEME_STORAGE_KEY, initialTheme);
     }
 
-    // Load bookmarks from localStorage
+    // Load bookmarks
     const storedBookmarks = localStorage.getItem(BOOKMARKS_STORAGE_KEY);
-    if (storedBookmarks) {
-      setBookmarks(JSON.parse(storedBookmarks));
-    }
+    if (storedBookmarks) setBookmarks(JSON.parse(storedBookmarks));
 
-    // Load user tier from localStorage
+    // Load user tier
     const storedUserTier = localStorage.getItem(USER_TIER_STORAGE_KEY) as UserTier | null;
-    if (storedUserTier) {
-      setUserTierState(storedUserTier);
-    }
+    if (storedUserTier) setUserTierState(storedUserTier);
     
-    // Load unlocked pro tips from localStorage
+    // Load unlocked pro tips
     const storedUnlockedProTips = localStorage.getItem(UNLOCKED_PRO_TIPS_STORAGE_KEY);
-    if (storedUnlockedProTips) {
-      setUnlockedProTips(new Set(JSON.parse(storedUnlockedProTips)));
-    }
+    if (storedUnlockedProTips) setUnlockedProTips(new Set(JSON.parse(storedUnlockedProTips)));
+
+    // Load pro tip tokens
+    const storedTokens = localStorage.getItem(PRO_TIP_TOKENS_STORAGE_KEY);
+    setProTipUnlockTokens(storedTokens ? parseInt(storedTokens, 10) : INITIAL_TOKENS);
+
+    // Load last claimed date
+    const storedLastClaimedDate = localStorage.getItem(LAST_CLAIMED_DATE_STORAGE_KEY);
+    if (storedLastClaimedDate) setLastClaimedDate(storedLastClaimedDate);
 
   }, []);
 
@@ -89,6 +102,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     localStorage.setItem(UNLOCKED_PRO_TIPS_STORAGE_KEY, JSON.stringify(Array.from(unlockedProTips)));
   }, [unlockedProTips, isMounted]);
 
+  useEffect(() => {
+    if (!isMounted) return;
+    localStorage.setItem(PRO_TIP_TOKENS_STORAGE_KEY, proTipUnlockTokens.toString());
+  }, [proTipUnlockTokens, isMounted]);
+
+  useEffect(() => {
+    if (!isMounted) return;
+    if (lastClaimedDate) {
+      localStorage.setItem(LAST_CLAIMED_DATE_STORAGE_KEY, lastClaimedDate);
+    } else {
+      localStorage.removeItem(LAST_CLAIMED_DATE_STORAGE_KEY);
+    }
+  }, [lastClaimedDate, isMounted]);
+
 
   const toggleTheme = useCallback(() => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -96,9 +123,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const addBookmark = useCallback((id: string) => {
     setBookmarks((prevBookmarks) => {
-      if (!prevBookmarks.includes(id)) {
-        return [...prevBookmarks, id];
-      }
+      if (!prevBookmarks.includes(id)) return [...prevBookmarks, id];
       return prevBookmarks;
     });
   }, []);
@@ -111,19 +136,40 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const setUserTier = useCallback((tier: UserTier) => {
     setUserTierState(tier);
-    if (tier === 'premium') {
-      // If user becomes premium, unlock all pro tips (conceptually)
-      // For this app, it means they won't need to "watch ad"
-    }
-  }, []);
-
-  const unlockProTip = useCallback((cheatSheetId: string) => {
-    setUnlockedProTips(prev => new Set(prev).add(cheatSheetId));
   }, []);
 
   const isProTipUnlocked = useCallback((cheatSheetId: string) => {
     return userTier === 'premium' || unlockedProTips.has(cheatSheetId);
   }, [userTier, unlockedProTips]);
+
+  const unlockProTipWithToken = useCallback((cheatSheetId: string): boolean => {
+    if (userTier === 'premium') { // Premium users don't use tokens
+        setUnlockedProTips(prev => new Set(prev).add(cheatSheetId));
+        return true;
+    }
+    if (proTipUnlockTokens > 0) {
+      setProTipUnlockTokens(prev => prev - 1);
+      setUnlockedProTips(prev => new Set(prev).add(cheatSheetId));
+      return true; 
+    }
+    return false; 
+  }, [proTipUnlockTokens, userTier]);
+
+  const canClaimDailyReward = useCallback((): boolean => {
+    if (!isMounted) return false; // Don't allow claim until mounted and date loaded
+    const today = new Date().toISOString().split('T')[0];
+    return lastClaimedDate !== today;
+  }, [lastClaimedDate, isMounted]);
+
+  const claimDailyReward = useCallback(() => {
+    if (canClaimDailyReward()) {
+      const tokensToAward = userTier === 'premium' ? 5 : 3; // Premium gets more
+      setProTipUnlockTokens(prev => prev + tokensToAward);
+      setLastClaimedDate(new Date().toISOString().split('T')[0]);
+      return { success: true, tokensAwarded: tokensToAward };
+    }
+    return { success: false, tokensAwarded: 0 };
+  }, [canClaimDailyReward, userTier]);
 
 
   if (!isMounted) {
@@ -141,9 +187,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         isBookmarked,
         userTier,
         setUserTier,
-        unlockProTip,
-        isProTipUnlocked,
+        proTipUnlockTokens,
         unlockedProTips,
+        isProTipUnlocked,
+        unlockProTipWithToken,
+        lastClaimedDate,
+        canClaimDailyReward,
+        claimDailyReward,
       }}
     >
       {children}
