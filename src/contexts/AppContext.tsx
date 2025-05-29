@@ -1,3 +1,4 @@
+
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 "use client";
 
@@ -51,6 +52,31 @@ export interface AppContextProps {
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
 
+// Helper function to load and merge achievements
+const loadAchievementsFromStorage = (): Achievement[] => {
+  const defaultAchievementsWithCriteria = INITIAL_ACHIEVEMENTS.map(ach => ({ ...ach, isUnlocked: false }));
+  if (typeof window !== 'undefined') {
+    const storedAchievementsData = localStorage.getItem(ACHIEVEMENTS_STORAGE_KEY);
+    if (storedAchievementsData) {
+      try {
+        // We only store {id, isUnlocked} pairs in localStorage
+        const storedStatuses: Array<{ id: string; isUnlocked: boolean }> = JSON.parse(storedAchievementsData);
+        const statusMap = new Map(storedStatuses.map(s => [s.id, s.isUnlocked]));
+        
+        return INITIAL_ACHIEVEMENTS.map(initialAch => ({
+          ...initialAch, // This ensures .criteria function is from INITIAL_ACHIEVEMENTS
+          isUnlocked: statusMap.get(initialAch.id) ?? false,
+        }));
+      } catch (error) {
+        console.error("Failed to parse achievements from localStorage", error);
+        return defaultAchievementsWithCriteria; // Fallback if parsing fails
+      }
+    }
+  }
+  return defaultAchievementsWithCriteria;
+};
+
+
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [bookmarks, setBookmarks] = useState<string[]>([]);
@@ -60,13 +86,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [lastClaimedDate, setLastClaimedDate] = useState<string | null>(null);
   const [currentStreak, setCurrentStreak] = useState<number>(0);
   const [lastStreakDay, setLastStreakDay] = useState<string | null>(null);
-  const [achievements, setAchievements] = useState<Achievement[]>(() => {
-    if (typeof window !== 'undefined') {
-      const storedAchievements = localStorage.getItem(ACHIEVEMENTS_STORAGE_KEY);
-      return storedAchievements ? JSON.parse(storedAchievements) : INITIAL_ACHIEVEMENTS.map(a => ({...a, isUnlocked: false}));
-    }
-    return INITIAL_ACHIEVEMENTS.map(a => ({...a, isUnlocked: false}));
-  });
+  const [achievements, setAchievements] = useState<Achievement[]>(loadAchievementsFromStorage);
   
   const [isMounted, setIsMounted] = useState(false);
   const { toast } = useToast();
@@ -111,12 +131,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const storedLastStreakDay = localStorage.getItem(LAST_STREAK_DAY_STORAGE_KEY);
     if (storedLastStreakDay) setLastStreakDay(storedLastStreakDay);
 
-    const storedAchievements = localStorage.getItem(ACHIEVEMENTS_STORAGE_KEY);
-    if (storedAchievements) {
-      setAchievements(JSON.parse(storedAchievements));
-    } else {
-      setAchievements(INITIAL_ACHIEVEMENTS.map(a => ({...a, isUnlocked: false}))); // ensure all have isUnlocked
-    }
+    // Achievements are now loaded correctly via useState initial function
+    // No need to re-load/parse them here which was causing the issue.
 
   }, []);
 
@@ -133,7 +149,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => { if (isMounted) { if (lastClaimedDate) localStorage.setItem(LAST_CLAIMED_DATE_STORAGE_KEY, lastClaimedDate); else localStorage.removeItem(LAST_CLAIMED_DATE_STORAGE_KEY);}}, [lastClaimedDate, isMounted]);
   useEffect(() => { if (isMounted) localStorage.setItem(CURRENT_STREAK_STORAGE_KEY, currentStreak.toString()); }, [currentStreak, isMounted]);
   useEffect(() => { if (isMounted) { if (lastStreakDay) localStorage.setItem(LAST_STREAK_DAY_STORAGE_KEY, lastStreakDay); else localStorage.removeItem(LAST_STREAK_DAY_STORAGE_KEY);}}, [lastStreakDay, isMounted]);
-  useEffect(() => { if (isMounted) localStorage.setItem(ACHIEVEMENTS_STORAGE_KEY, JSON.stringify(achievements)); }, [achievements, isMounted]);
+  
+  // Save only {id, isUnlocked} for achievements to localStorage
+  useEffect(() => {
+    if (isMounted) {
+      const achievementsToStore = achievements.map(({ id, isUnlocked }) => ({ id, isUnlocked }));
+      localStorage.setItem(ACHIEVEMENTS_STORAGE_KEY, JSON.stringify(achievementsToStore));
+    }
+  }, [achievements, isMounted]);
 
   const checkAndUnlockAchievements = useCallback(() => {
     if (!isMounted) return;
@@ -142,12 +165,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       bookmarks,
       unlockedProTips,
       userTier,
-      // Add other relevant state pieces here if new achievements need them
     };
 
     let newAchievementsUnlocked = false;
     const updatedAchievements = achievements.map(ach => {
-      if (!ach.isUnlocked && ach.criteria(appContextSnapshot)) {
+      // Defensive check: ensure ach.criteria is a function before calling
+      if (!ach.isUnlocked && ach.criteria && typeof ach.criteria === 'function' && ach.criteria(appContextSnapshot)) {
         const IconComponent = LucideIcons[ach.iconName] || LucideIcons.Award;
         toast({
           title: (
@@ -183,10 +206,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   
   const setUserTier = useCallback((tier: UserTier) => {
     setUserTierState(tier);
-    // Immediately check for premium achievement upon tier change
-    // This is a bit of a hack; ideally, checkAndUnlockAchievements would be robust enough
-    // or setUserTier would be part of the snapshot passed to it.
-    // For now, explicitly trigger it.
     setTimeout(() => checkAndUnlockAchievements(), 0);
   }, [checkAndUnlockAchievements]);
 
@@ -195,15 +214,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const unlockProTipWithToken = useCallback((id: string): boolean => {
     if (userTier === 'premium') {
       setUnlockedProTips(prev => new Set(prev).add(id));
+      setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievement after unlock
       return true;
     }
     if (proTipUnlockTokens > 0) {
       setProTipUnlockTokens(prev => prev - 1);
       setUnlockedProTips(prev => new Set(prev).add(id));
+      setTimeout(() => checkAndUnlockAchievements(), 0); // Check achievement after unlock
       return true;
     }
     return false;
-  }, [proTipUnlockTokens, userTier]);
+  }, [proTipUnlockTokens, userTier, checkAndUnlockAchievements]);
 
   const getYesterdayDateString = () => {
     const yesterday = new Date();
@@ -229,10 +250,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     if (lastStreakDay === yesterday) {
       newStreakCount = currentStreak + 1;
-    } else if (lastStreakDay !== today) { // If not today (meaning not claimed yet today) and not yesterday, reset.
-      newStreakCount = 1; // Start a new streak
-    } else { // lastStreakDay is today, implies already claimed or something is off
-      newStreakCount = currentStreak; // Should not happen if canClaimDailyReward is true
+    } else if (lastStreakDay !== today) { 
+      newStreakCount = 1;
+    } else { 
+      newStreakCount = currentStreak;
     }
     
     setCurrentStreak(newStreakCount);
@@ -250,7 +271,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setProTipUnlockTokens(prev => prev + totalTokensAwarded);
     setLastClaimedDate(today);
     
-    // Trigger achievement check after state updates
     setTimeout(() => checkAndUnlockAchievements(), 0);
 
     return { success: true, tokensAwarded: baseTokensAwarded, bonusTokens: bonusFromStreak, newStreak: newStreakCount };
