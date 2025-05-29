@@ -1,3 +1,4 @@
+
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 "use client";
 
@@ -10,32 +11,34 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, XCircle } from 'lucide-react';
+import { useAppContext } from '@/hooks/useAppContext'; // Import useAppContext
+
 
 export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category | 'All'>('All');
-  const [hydrated, setHydrated] = useState(false);
+  // const [hydrated, setHydrated] = useState(false); // Replaced by isAppContextReady
+  const { isAppContextReady } = useAppContext(); // Use context readiness
 
-  useEffect(() => {
-    setHydrated(true); // Ensure client-side only logic runs after hydration
-  }, []);
+  // useEffect(() => {
+  //   setHydrated(true); 
+  // }, []);
 
   const filteredSheets = useMemo(() => {
-    if (!hydrated) return []; // Return empty or placeholder during SSR/hydration mismatch prevention
+    if (!isAppContextReady) return []; 
 
     return CHEAT_SHEETS_DATA.filter((sheet) => {
       const matchesCategory = selectedCategory === 'All' || sheet.category === selectedCategory;
       const matchesSearch =
         searchTerm.trim() === '' ||
         sheet.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        sheet.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (sheet.content && sheet.content.toLowerCase().includes(searchTerm.toLowerCase())) || // Added check for sheet.content
         sheet.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
       return matchesCategory && matchesSearch;
     });
-  }, [searchTerm, selectedCategory, hydrated]);
+  }, [searchTerm, selectedCategory, isAppContextReady]);
 
-  if (!hydrated) {
-    // Optional: Render a loading state or skeleton here
+  if (!isAppContextReady) {
     return (
       <div className="space-y-6">
         <div className="animate-pulse flex flex-col md:flex-row gap-4">

@@ -1,3 +1,4 @@
+
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 "use client";
 
@@ -5,24 +6,26 @@ import { useMemo, useEffect, useState } from 'react';
 import { CheatSheetList } from '@/components/cheat-sheets/CheatSheetList';
 import { CHEAT_SHEETS_DATA } from '@/data/cheat-sheets';
 import { useAppContext } from '@/hooks/useAppContext';
-import { BookmarkCheck } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext'; // Import useAuth
+import { BookmarkCheck, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 export default function SavedPage() {
-  const { bookmarks } = useAppContext();
-  const [hydrated, setHydrated] = useState(false);
+  const { bookmarks, isAppContextReady } = useAppContext();
+  const { user, loading: authLoading } = useAuth(); // Get user state
+  // const [hydrated, setHydrated] = useState(false); // Replaced by isAppContextReady
 
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  // useEffect(() => {
+  //   setHydrated(true);
+  // }, []);
 
   const bookmarkedSheets = useMemo(() => {
-    if (!hydrated) return [];
+    if (!isAppContextReady || !user) return []; // Require app context ready and user
     return CHEAT_SHEETS_DATA.filter((sheet) => bookmarks.includes(sheet.id));
-  }, [bookmarks, hydrated]);
+  }, [bookmarks, isAppContextReady, user]);
 
-  if (!hydrated) {
+  if (authLoading || !isAppContextReady) {
      return (
       <div className="space-y-6">
         <div className="animate-pulse h-10 bg-muted rounded-md w-1/2 mb-4"></div>
@@ -34,6 +37,20 @@ export default function SavedPage() {
       </div>
     );
   }
+
+  if (!user) {
+    return (
+      <div className="text-center py-10 border-2 border-dashed border-muted-foreground/30 rounded-lg">
+        <LogIn className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+        <h2 className="text-xl font-semibold text-foreground mb-2">Login to View Saved Sheets</h2>
+        <p className="text-muted-foreground mb-4">Please log in to access your bookmarked cheat sheets.</p>
+        <Button asChild>
+          <Link href="/login">Login</Link>
+        </Button>
+      </div>
+    );
+  }
+
 
   return (
     <div className="space-y-8">
