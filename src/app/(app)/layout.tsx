@@ -1,11 +1,11 @@
 
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
-"use client"; // This layout is now client-side due to hooks from Auth/App Context
+"use client"; // This layout is now client-side due to hooks from App Context
 
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { useAppContext } from '@/hooks/useAppContext'; // To check if context is ready
-import { Brain } from 'lucide-react'; // For loading indicator
+import { useAppContext } from '@/hooks/useAppContext';
+import { Brain } from 'lucide-react';
 
 export default function AppLayout({
   children,
@@ -14,6 +14,7 @@ export default function AppLayout({
 }) {
   const { isAppContextReady } = useAppContext();
 
+  // This loading state is now simpler, only relying on AppContext's readiness
   if (!isAppContextReady) {
     return (
       <div className="flex flex-col min-h-screen items-center justify-center bg-background">

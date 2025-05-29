@@ -6,26 +6,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { CheckCircle, Gem, Zap, ShieldOff } from 'lucide-react';
 import { useAppContext } from '@/hooks/useAppContext';
-import { useAuth } from '@/contexts/AuthContext'; // Import useAuth
+// import { useAuth } from '@/contexts/AuthContext'; // Removed useAuth
 import { useToast } from '@/hooks/use-toast';
-import { useRouter } from 'next/navigation'; // Import useRouter
+// import { useRouter } from 'next/navigation'; // Removed useRouter as login redirect is gone
 
 export default function PremiumPage() {
-  const { userTier, setUserTier } = useAppContext();
-  const { user, loading: authLoading } = useAuth(); // Get user state
+  const { userTier, setUserTier, isAppContextReady } = useAppContext(); // Added isAppContextReady
+  // const { user, loading: authLoading } = useAuth(); // Removed useAuth
   const { toast } = useToast();
-  const router = useRouter(); // Initialize router
+  // const router = useRouter(); // Removed useRouter
 
   const handleUpgrade = () => {
-    if (!user) {
-      toast({
-        title: 'Login Required',
-        description: 'Please log in to upgrade to Premium.',
-        variant: 'destructive',
-      });
-      router.push('/login'); // Redirect to login page
-      return;
-    }
+    // No login check needed
     setUserTier('premium');
     toast({
       title: 'Congratulations! 🎉',
@@ -33,17 +25,9 @@ export default function PremiumPage() {
       variant: 'default',
     });
   };
-  
+
   const handleDowngrade = () => {
-     if (!user) { // Should not happen if upgrade requires login, but good practice
-      toast({
-        title: 'Login Required',
-        description: 'Please log in to manage your subscription.',
-        variant: 'destructive',
-      });
-      router.push('/login');
-      return;
-    }
+    // No login check needed
     setUserTier('free');
     toast({
       title: 'Subscription Changed',
@@ -58,8 +42,8 @@ export default function PremiumPage() {
     { icon: Gem, text: "Exclusive Future Features", description: "Be the first to access new tools like daily challenges and AI feedback." },
   ];
 
-  if (authLoading) {
-    return <div className="flex justify-center items-center min-h-[calc(100vh-200px)]"><p>Loading user status...</p></div>;
+  if (!isAppContextReady) { // Simplified loading check
+    return <div className="flex justify-center items-center min-h-[calc(100vh-200px)]"><p>Loading page...</p></div>;
   }
 
   return (
@@ -70,13 +54,13 @@ export default function PremiumPage() {
           Go Premium!
         </h1>
         <p className="mt-4 text-xl text-foreground/80">
-          Unlock the full power of MarkSpark and supercharge your marketing knowledge. 
+          Unlock the full power of MarkSpark and supercharge your marketing knowledge.
         </p>
       </div>
 
       <Card className="shadow-xl">
         <CardHeader>
-          <CardTitle className="text-2xl">MarkSpark Premium</CardTitle> 
+          <CardTitle className="text-2xl">MarkSpark Premium</CardTitle>
           <CardDescription>Get unlimited access to all features.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -97,11 +81,11 @@ export default function PremiumPage() {
           </div>
         </CardContent>
         <CardFooter>
-          {userTier === 'free' || !user ? ( // Show upgrade if free OR not logged in
+          {userTier === 'free' ? ( // Simplified condition
             <Button size="lg" className="w-full text-lg shadow-md hover:shadow-lg transition-shadow" onClick={handleUpgrade}>
               <Gem className="mr-2 h-5 w-5" /> Upgrade to Premium
             </Button>
-          ) : ( // Only show downgrade if user is logged in and premium
+          ) : (
             <div className="w-full text-center space-y-2">
               <p className="text-green-600 font-semibold flex items-center justify-center gap-2">
                 <CheckCircle className="h-5 w-5" /> You are a Premium Member!

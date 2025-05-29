@@ -1,7 +1,7 @@
 
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+// import { getAuth, GoogleAuthProvider } from 'firebase/auth'; // Removed Auth
 import { getFirestore } from 'firebase/firestore';
 
 const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
@@ -21,7 +21,8 @@ if (!apiKey || typeof apiKey !== 'string' || apiKey.trim() === '') {
   // though Firebase itself will throw an error shortly if initializeApp is called with an invalid config.
   // throw new Error("Firebase API Key is missing or invalid. App cannot start.");
 } else {
-  console.log("Firebase API Key found in environment variables. Attempting to initialize Firebase...");
+  // This console.log can be removed in production or if too verbose
+  // console.log("Firebase API Key found in environment variables. Attempting to initialize Firebase...");
 }
 
 const firebaseConfig = {
@@ -41,29 +42,17 @@ if (!getApps().length) {
     if (firebaseConfig.apiKey && firebaseConfig.apiKey.trim() !== '') {
       app = initializeApp(firebaseConfig);
     } else {
-      // This path should ideally not be reached if the earlier check is robust,
-      // but it's a fallback.
       console.error("Firebase initialization skipped due to missing API key. App functionality will be severely limited.");
-      // Create a dummy app object or handle this state appropriately
-      // For now, we'll let it fail later if services are requested on an uninitialized app.
-      // Or, throw new Error("Cannot initialize Firebase: API key is missing.");
     }
   } catch (error) {
     console.error("Error initializing Firebase app:", error);
-    // Rethrow or handle as critical
-    // throw error; 
   }
 } else {
   app = getApp();
 }
 
-// It's safer to only try to get auth and db if app was successfully initialized.
-// However, `getAuth` and `getFirestore` can also take an app instance.
-// If `app` is undefined because initializeApp failed or was skipped, these will error.
+// const auth = getAuth(app); // Removed Auth
+const db = app ? getFirestore(app) : null; // Get Firestore only if app is initialized
+// const googleProvider = new GoogleAuthProvider(); // Removed Auth
 
-const auth = getAuth(app); // This will throw if `app` is not a valid FirebaseApp instance
-const db = getFirestore(app); // Same here
-const googleProvider = new GoogleAuthProvider();
-
-export { app, auth, db, googleProvider };
-
+export { app, db }; // Removed auth, googleProvider
