@@ -1,13 +1,10 @@
-
 {
   "name": "MarkSpark",
   "short_name": "MarkSpark",
-  "description": "MarkSpark: Marketing Cheat Sheets & Quizzes. 200+ in-app marketing hacks. Learn SEO, ads, and social media – no downloads, no BS!",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#2563eb",
-  "background_color": "#eff6ff",
+  "theme_color": "#2563EB",
+  "background_color": "#EFF6FF",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
@@ -18,12 +15,14 @@
     {
       "src": "/icons/icon-384x384.png",
       "sizes": "384x384",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
