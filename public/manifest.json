@@ -1,41 +1,24 @@
+
 {
   "name": "MarkSpark",
   "short_name": "MarkSpark",
-  "description": "MarkSpark: Your go-to for marketing cheat sheets, interactive quizzes, and gamified learning.",
+  "description": "Marketing cheat sheets, interactive quizzes, and gamified learning.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFF0E1",
-  "theme_color": "#007AFF",
+  "background_color": "#1e3a8a",
+  "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "/icons/icon-192x192-any.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-192x192-maskable.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icons/icon-512x512-any.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icons/icon-512x512-maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
