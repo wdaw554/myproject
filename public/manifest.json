@@ -1,12 +1,12 @@
+
 {
   "name": "MarkSpark",
   "short_name": "MarkSpark",
-  "description": "Marketing Cheat Sheets & Quizzes to boost your skills!",
+  "description": "Your go-to resource for marketing cheat sheets, interactive quizzes, and gamified learning. Master SEO, content strategy, social media, and more!",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFF2E0",
-  "theme_color": "#FF8C00",
-  "orientation": "portrait-primary",
+  "background_color": "#EBF4FF",
+  "theme_color": "#2563EB",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
@@ -24,7 +24,13 @@
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
