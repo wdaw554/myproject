@@ -2,13 +2,12 @@
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 "use client";
 
-import type { CheatSheet } from '@/types'; // Removed QuizQuestion, CaseStudy as they are part of CheatSheet
+import type { CheatSheet } from '@/types';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Bookmark, Lock, Lightbulb, Gem, HelpCircle, CheckCircle, BookOpen, Target as TargetIcon, Brain as BrainIcon, FileText as FileTextIcon, XCircle, CheckCircle2 } from 'lucide-react'; // Removed LogIn
+import { Bookmark, Lock, Lightbulb, Gem, HelpCircle, CheckCircle, BookOpen, Target as TargetIcon, Brain as BrainIcon, FileText as FileTextIcon, XCircle, CheckCircle2 } from 'lucide-react';
 import { useAppContext } from '@/hooks/useAppContext';
-// import { useAuth } from '@/contexts/AuthContext'; // Removed useAuth
 import { TooltipIcon } from '@/components/shared/TooltipIcon';
 import Image from 'next/image';
 import {
@@ -25,11 +24,10 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { cn } from '@/lib/utils';
-// import { useRouter } from 'next/navigation'; // Removed useRouter
 
 interface CheatSheetCardProps {
   sheet: CheatSheet;
@@ -45,19 +43,24 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     unlockProTipWithToken,
     proTipUnlockTokens,
     checkAndUnlockAchievements,
-    isAppContextReady, // Added for conditional rendering, though less critical now
+    isAppContextReady,
   } = useAppContext();
-  // const { user, loading: authLoading } = useAuth(); // Removed useAuth
   const { toast } = useToast();
-  // const router = useRouter(); // Removed useRouter
   const [isAlertOpen, setIsAlertOpen] = React.useState(false);
   const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: { selectedOption: string | null; submitted: boolean } }>({});
 
+  useEffect(() => {
+    if (sheet.imageUrl && sheet.imageUrl.startsWith('http://')) {
+      console.warn(
+        `Warning: Cheat sheet "${sheet.title}" (ID: ${sheet.id}) is using an insecure HTTP image URL: ${sheet.imageUrl}. Please update to HTTPS in src/data/cheat-sheets.ts to avoid mixed content issues.`
+      );
+    }
+  }, [sheet.imageUrl, sheet.title, sheet.id]);
+
   const bookmarked = isBookmarked(sheet.id);
-  const effectivelyUnlocked = isProTipUnlocked(sheet.id); // Simplified: no user check
+  const effectivelyUnlocked = isProTipUnlocked(sheet.id);
 
   const handleToggleBookmark = () => {
-    // No login check
     if (bookmarked) {
       removeBookmark(sheet.id);
       toast({ title: "Bookmark Removed", description: `"${sheet.title}" removed from your bookmarks.` });
@@ -69,7 +72,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   };
 
   const handleUnlockProTipAttempt = () => {
-    // No login check
     if (userTier === 'premium') {
       const success = unlockProTipWithToken(sheet.id);
       if (success) {
@@ -99,7 +101,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   const aiHint = `${firstTag} ${secondTag}`.trim();
 
   const handleQuizOptionChange = (quizIndex: number, selectedValue: string) => {
-    // No login check
     setQuizAnswers(prev => ({
       ...prev,
       [quizIndex]: {
@@ -110,7 +111,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   };
 
   const handleQuizSubmit = (quizIndex: number) => {
-    // No login check
     setQuizAnswers(prev => ({
       ...prev,
       [quizIndex]: {
@@ -120,7 +120,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     }));
   };
 
-  if (!isAppContextReady) { // Optional: could show a shimmer or minimal content
+  if (!isAppContextReady) {
       return <Card className="flex flex-col h-full shadow-lg p-4 animate-pulse bg-muted/50"><div className="h-48"></div></Card>;
   }
 
@@ -129,7 +129,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       {sheet.imageUrl && (
         <div className="relative w-full h-40 md:h-48">
           <Image
-            src={sheet.imageUrl}
+            src={sheet.imageUrl} // Ensure this URL is HTTPS in your data file
             alt={sheet.title}
             layout="fill"
             objectFit="cover"
@@ -140,7 +140,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       <CardHeader className="pt-4 pb-2">
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl font-semibold leading-tight">{sheet.title}</CardTitle>
-          <Button variant="ghost" size="icon" onClick={handleToggleBookmark} aria-label={bookmarked ? 'Remove bookmark' : 'Add bookmark'} /* disabled={authLoading} - removed */>
+          <Button variant="ghost" size="icon" onClick={handleToggleBookmark} aria-label={bookmarked ? 'Remove bookmark' : 'Add bookmark'}>
             <Bookmark className={`h-5 w-5 ${bookmarked ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
           </Button>
         </div>
@@ -184,24 +184,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                 </AccordionContent>
               </AccordionItem>
             )}
-
-            {sheet.interactiveElements && sheet.interactiveElements.length > 0 && (
-              <AccordionItem value="interactive-tips">
-                <AccordionTrigger className="text-xs font-semibold text-primary hover:no-underline">
-                    <div className="flex items-center gap-2">
-                         <Lightbulb className="h-4 w-4" /> Interactive Tips
-                    </div>
-                </AccordionTrigger>
-                <AccordionContent className="pt-2">
-                    <div className="flex flex-wrap gap-x-4 gap-y-2">
-                    {sheet.interactiveElements.map((el, index) => (
-                        <TooltipIcon key={index} element={el} />
-                    ))}
-                    </div>
-                </AccordionContent>
-              </AccordionItem>
-            )}
-
+            
             {sheet.caseStudies && sheet.caseStudies.length > 0 && (
                 <AccordionItem value="case-studies">
                     <AccordionTrigger className="text-xs font-semibold text-primary hover:no-underline">
@@ -219,6 +202,23 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                         ))}
                     </AccordionContent>
                 </AccordionItem>
+            )}
+
+            {sheet.interactiveElements && sheet.interactiveElements.length > 0 && (
+              <AccordionItem value="interactive-tips">
+                <AccordionTrigger className="text-xs font-semibold text-primary hover:no-underline">
+                    <div className="flex items-center gap-2">
+                         <Lightbulb className="h-4 w-4" /> Interactive Tips
+                    </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-2">
+                    <div className="flex flex-wrap gap-x-4 gap-y-2">
+                    {sheet.interactiveElements.map((el, index) => (
+                        <TooltipIcon key={index} element={el} />
+                    ))}
+                    </div>
+                </AccordionContent>
+              </AccordionItem>
             )}
 
             {sheet.quiz && sheet.quiz.length > 0 && (
@@ -240,7 +240,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                             <RadioGroup
                               onValueChange={(value) => handleQuizOptionChange(quizIndex, value)}
                               value={currentAnswer?.selectedOption ?? undefined}
-                              disabled={isSubmitted} // No user check needed
+                              disabled={isSubmitted}
                             >
                               {q.options.map((opt, optionIndex) => {
                                 const optionId = `quiz-${sheet.id}-${quizIndex}-${optionIndex}`;
@@ -269,7 +269,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                                 );
                               })}
                             </RadioGroup>
-                            {/* Removed Login to Take Quiz button */}
                             {!isSubmitted && (
                               <Button
                                 size="sm"
@@ -304,7 +303,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
               <h4 className="text-sm font-semibold text-accent-foreground flex items-center gap-2">
                 <Lightbulb className="h-4 w-4 text-yellow-500" /> Pro Tip
               </h4>
-              {!effectivelyUnlocked && userTier === 'free' && ( // Simplified condition
+              {!effectivelyUnlocked && userTier === 'free' && (
                  <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
                   <AlertDialogTrigger asChild>
                     <Button variant="outline" size="sm" className="text-xs h-7">
@@ -342,7 +341,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
               <p className="text-xs text-accent-foreground/90">{sheet.proTip}</p>
             ) : (
               <p className="text-xs text-muted-foreground italic">
-                {userTier === 'free' ? "Unlock with a token or go Premium to view this tip." : "Unlock to view this tip."} {/* Simplified message */}
+                {userTier === 'free' ? "Unlock with a token or go Premium to view this tip." : "Unlock to view this tip."}
               </p>
             )}
           </div>
