@@ -3,16 +3,13 @@
 "use client";
 
 import Link from 'next/link';
-import { Brain, Sun, Moon, Home, Bookmark, Gem, Gift, Flame } from 'lucide-react'; // Removed LogIn, LogOut, UserCircle
+import { Brain, Sun, Moon, Home, Bookmark, /*Gem,*/ Gift, Flame } from 'lucide-react'; // Gem removed
 import { Button } from '@/components/ui/button';
 import { useAppContext } from '@/hooks/useAppContext';
-// import { useAuth } from '@/contexts/AuthContext'; // Removed useAuth
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-// Removed DropdownMenu imports as they were for user account
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Removed Avatar
 
 export function Header() {
   const {
@@ -23,25 +20,23 @@ export function Header() {
     proTipUnlockTokens,
     currentStreak
   } = useAppContext();
-  // const { user, loading, signOut } = useAuth(); // Removed useAuth
   const { toast } = useToast();
   const pathname = usePathname();
 
   const navItems = [
     { href: '/', label: 'Home', icon: Home },
-    { href: '/saved', label: 'Saved', icon: Bookmark }, // No longer requiresAuth
-    { href: '/premium', label: 'Premium', icon: Gem },
+    { href: '/saved', label: 'Saved', icon: Bookmark },
+    // { href: '/premium', label: 'Premium', icon: Gem }, // Premium link removed
   ];
 
   const handleClaimReward = () => {
-    // No user check needed now for claiming rewards
     const reward = claimDailyReward();
     if (reward.success) {
       let description = `You received ${reward.tokensAwarded} Pro Tip Tokens.`;
       if (reward.bonusTokens > 0) {
         description += ` Plus ${reward.bonusTokens} bonus tokens for your ${reward.newStreak}-day streak!`;
       }
-      description += ` You now have ${proTipUnlockTokens + reward.tokensAwarded + reward.bonusTokens} tokens.`;
+      description += ` You now have ${proTipUnlockTokens + reward.tokensAwarded + reward.bonusTokens} tokens.`; // Corrected token count
 
       toast({
         title: (
@@ -61,13 +56,7 @@ export function Header() {
     }
   };
 
-  const showClaimButton = canClaimDailyReward(); // No user check needed
-
-  // const getInitials = (email) => { // Removed
-  //   if (!email) return 'U';
-  //   const parts = email.split('@')[0].split(/[._-]/);
-  //   return parts.map(part => part[0]).join('').toUpperCase().slice(0, 2);
-  // };
+  const showClaimButton = canClaimDailyReward();
 
 
   return (
@@ -79,7 +68,6 @@ export function Header() {
         </Link>
         <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
-            // if (item.requiresAuth && !user && !loading) return null; // Removed auth check
             return (
               <Button
                 key={item.href}
@@ -96,12 +84,11 @@ export function Header() {
           })}
         </nav>
         <div className="flex items-center gap-2 md:gap-3">
-          {/* Removed user-specific token/streak display that required login check */}
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="ghost" size="sm" className="relative px-2" disabled>
-                  <Gem className="h-4 w-4 mr-1 text-primary" /> {proTipUnlockTokens}
+                  <Gift className="h-4 w-4 mr-1 text-primary" /> {proTipUnlockTokens} {/* Changed icon to Gift, could be Gem too */}
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -144,14 +131,10 @@ export function Header() {
             {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
           </Button>
 
-          {/* Removed User Avatar Dropdown and Login Button */}
-
         </div>
       </div>
-      {/* Mobile navigation bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-background/95 p-2 flex justify-around">
          {navItems.map((item) => {
-           // if (item.requiresAuth && !user && !loading) return null; // Removed auth check
            return (
             <Button
               key={item.href}

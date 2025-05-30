@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from '@/hooks/use-toast';
-import Link from 'next/link';
+// import Link from 'next/link'; // Link import removed as "Go Premium" button is removed
 import React, { useState, useEffect } from 'react';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -38,7 +38,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     addBookmark,
     removeBookmark,
     isBookmarked,
-    userTier,
+    // userTier, // Removed
     isProTipUnlocked,
     unlockProTipWithToken,
     proTipUnlockTokens,
@@ -72,26 +72,27 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   };
 
   const handleUnlockProTipAttempt = () => {
-    if (userTier === 'premium') {
-      const success = unlockProTipWithToken(sheet.id);
-      if (success) {
-        toast({ title: "Pro Tip Unlocked!", description: "Premium members have all tips unlocked." });
-        setTimeout(() => checkAndUnlockAchievements(), 0);
-      }
-      setIsAlertOpen(false);
-      return;
-    }
+    // if (userTier === 'premium') { // Removed premium check
+    //   const success = unlockProTipWithToken(sheet.id);
+    //   if (success) {
+    //     toast({ title: "Pro Tip Unlocked!", description: "Premium members have all tips unlocked." });
+    //     setTimeout(() => checkAndUnlockAchievements(), 0);
+    //   }
+    //   setIsAlertOpen(false);
+    //   return;
+    // }
 
     if (proTipUnlockTokens > 0) {
       const success = unlockProTipWithToken(sheet.id);
       if (success) {
-        toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens -1}` });
+        toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens -1}` }); // -1 from current tokens for display
         setTimeout(() => checkAndUnlockAchievements(), 0);
       } else {
+        // This case should ideally not happen if proTipUnlockTokens > 0, but good for robustness
         toast({ title: "Unlock Failed", description: "Something went wrong.", variant: "destructive" });
       }
     } else {
-      toast({ title: "No Tokens Left", description: "Claim your daily reward or go premium!", variant: "destructive" });
+      toast({ title: "No Tokens Left", description: "Claim your daily reward to get more tokens!", variant: "destructive" });
     }
     setIsAlertOpen(false);
   };
@@ -118,6 +119,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
         submitted: true,
       }
     }));
+    // Potentially call checkAndUnlockAchievements if there's an achievement for completing quizzes
   };
 
   if (!isAppContextReady) {
@@ -129,7 +131,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       {sheet.imageUrl && (
         <div className="relative w-full h-40 md:h-48">
           <Image
-            src={sheet.imageUrl} // Ensure this URL is HTTPS in your data file
+            src={sheet.imageUrl}
             alt={sheet.title}
             layout="fill"
             objectFit="cover"
@@ -303,7 +305,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
               <h4 className="text-sm font-semibold text-accent-foreground flex items-center gap-2">
                 <Lightbulb className="h-4 w-4 text-yellow-500" /> Pro Tip
               </h4>
-              {!effectivelyUnlocked && userTier === 'free' && (
+              {!effectivelyUnlocked && ( // Removed userTier check
                  <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
                   <AlertDialogTrigger asChild>
                     <Button variant="outline" size="sm" className="text-xs h-7">
@@ -318,7 +320,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                       <AlertDialogDescription>
                         {proTipUnlockTokens > 0
                           ? `Use 1 Pro Tip Token to unlock this insight? You have ${proTipUnlockTokens} token(s) remaining.`
-                          : "You've run out of Pro Tip Tokens for today. Claim your daily reward or upgrade to Premium for unlimited access!"}
+                          : "You've run out of Pro Tip Tokens for today. Claim your daily reward to get more tokens!"}
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
@@ -328,9 +330,10 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
                           Use 1 Token <Gem className="ml-2 h-3 w-3" />
                         </AlertDialogAction>
                       ) : (
-                        <Button asChild className="bg-primary hover:bg-primary/90">
-                          <Link href="/premium">Go Premium</Link>
-                        </Button>
+                        // Removed "Go Premium" button, user can only cancel or get more tokens via daily reward
+                        <AlertDialogAction onClick={() => setIsAlertOpen(false)} className="bg-primary hover:bg-primary/90">
+                          OK
+                        </AlertDialogAction>
                       )}
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -341,7 +344,7 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
               <p className="text-xs text-accent-foreground/90">{sheet.proTip}</p>
             ) : (
               <p className="text-xs text-muted-foreground italic">
-                {userTier === 'free' ? "Unlock with a token or go Premium to view this tip." : "Unlock to view this tip."}
+                Unlock with a token to view this tip.
               </p>
             )}
           </div>

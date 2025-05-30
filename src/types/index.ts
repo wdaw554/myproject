@@ -39,7 +39,8 @@ export interface CheatSheet {
   caseStudies?: CaseStudy[];
 }
 
-export type UserTier = 'free' | 'premium';
+// UserTier removed as premium features are being removed.
+// export type UserTier = 'free' | 'premium';
 
 export interface Achievement {
   id: string;

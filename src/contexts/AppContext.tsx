@@ -2,7 +2,7 @@
 // @ts-nocheck : This is a temporary workaround for the issue with the generated types.
 "use client";
 
-import type { UserTier, Achievement } from '@/types';
+import type { Achievement } from '@/types';
 import { INITIAL_ACHIEVEMENTS } from '@/data/achievements';
 import React, { createContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { useToast } from '@/hooks/use-toast';
@@ -11,7 +11,7 @@ import { Brain } from 'lucide-react'; // For loading indicator
 
 const BOOKMARKS_STORAGE_KEY_PREFIX = 'markspark_bookmarks_v1_';
 const THEME_STORAGE_KEY = 'markspark_theme_v1';
-const USER_TIER_STORAGE_KEY_PREFIX = 'markspark_user_tier_v1_';
+// const USER_TIER_STORAGE_KEY_PREFIX = 'markspark_user_tier_v1_'; // Removed
 const UNLOCKED_PRO_TIPS_STORAGE_KEY_PREFIX = 'markspark_unlocked_pro_tips_v1_';
 const PRO_TIP_TOKENS_STORAGE_KEY_PREFIX = 'markspark_pro_tip_tokens_v1_';
 const LAST_CLAIMED_DATE_STORAGE_KEY_PREFIX = 'markspark_last_claimed_date_v1_';
@@ -20,9 +20,8 @@ const LAST_STREAK_DAY_STORAGE_KEY_PREFIX = 'markspark_last_streak_day_v1_';
 const ACHIEVEMENTS_STORAGE_KEY_PREFIX = 'markspark_achievements_v1_';
 
 
-const INITIAL_TOKENS = 10; // Reverted from 50
-const DAILY_REWARD_FREE = 5; // Reverted from 50
-const DAILY_REWARD_PREMIUM = 7; // Reverted from 60
+const INITIAL_TOKENS = 10;
+const DAILY_REWARD_TOKENS = 50; // Single daily reward amount
 
 const STREAK_BONUSES = {
   3: 15,
@@ -37,8 +36,8 @@ export interface AppContextProps {
   addBookmark: (id: string) => void;
   removeBookmark: (id: string) => void;
   isBookmarked: (id: string) => boolean;
-  userTier: UserTier;
-  setUserTier: (tier: UserTier) => void;
+  // userTier: UserTier; // Removed
+  // setUserTier: (tier: UserTier) => void; // Removed
   proTipUnlockTokens: number;
   unlockedProTips: Set<string>;
   isProTipUnlocked: (cheatSheetId: string) => boolean;
@@ -55,7 +54,6 @@ export interface AppContextProps {
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined);
 
-// Simplified storage key as there's no user distinction anymore
 const GUEST_USER_ID_PLACEHOLDER = 'guest';
 const getStorageKey = (prefix: string) => {
   return `${prefix}${GUEST_USER_ID_PLACEHOLDER}`;
@@ -65,7 +63,7 @@ const getStorageKey = (prefix: string) => {
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [bookmarks, setBookmarks] = useState<string[]>([]);
-  const [userTier, setUserTierState] = useState<UserTier>('free');
+  // const [userTier, setUserTierState] = useState<UserTier>('free'); // Removed
   const [unlockedProTips, setUnlockedProTips] = useState<Set<string>>(new Set());
   const [proTipUnlockTokens, setProTipUnlockTokens] = useState<number>(INITIAL_TOKENS);
   const [lastClaimedDate, setLastClaimedDate] = useState<string | null>(null);
@@ -77,7 +75,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [isAppContextReady, setIsAppContextReady] = useState(false);
   const { toast } = useToast();
 
-  // Load initial theme (not user-specific)
   useEffect(() => {
     setIsMounted(true);
     const storedTheme = localStorage.getItem(THEME_STORAGE_KEY) as 'light' | 'dark' | null;
@@ -93,7 +90,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   }, []);
 
-  // Effect to load data once component is mounted (no authLoading dependency)
   useEffect(() => {
     if (!isMounted) return;
 
@@ -123,8 +119,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const storedBookmarks = localStorage.getItem(getStorageKey(BOOKMARKS_STORAGE_KEY_PREFIX));
     if (storedBookmarks) setBookmarks(JSON.parse(storedBookmarks)); else setBookmarks([]);
 
-    const storedUserTier = localStorage.getItem(getStorageKey(USER_TIER_STORAGE_KEY_PREFIX)) as UserTier | null;
-    if (storedUserTier) setUserTierState(storedUserTier); else setUserTierState('free');
+    // const storedUserTier = localStorage.getItem(getStorageKey(USER_TIER_STORAGE_KEY_PREFIX)) as UserTier | null; // Removed
+    // if (storedUserTier) setUserTierState(storedUserTier); else setUserTierState('free'); // Removed
 
     const storedUnlockedProTips = localStorage.getItem(getStorageKey(UNLOCKED_PRO_TIPS_STORAGE_KEY_PREFIX));
     if (storedUnlockedProTips) setUnlockedProTips(new Set(JSON.parse(storedUnlockedProTips))); else setUnlockedProTips(new Set());
@@ -152,23 +148,21 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [isMounted]);
 
 
-  // Save theme
   useEffect(() => {
     if (!isMounted || !isAppContextReady) return;
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme, isMounted, isAppContextReady]);
 
-  // Save other data
   useEffect(() => {
     if (!isMounted || !isAppContextReady) return;
     localStorage.setItem(getStorageKey(BOOKMARKS_STORAGE_KEY_PREFIX), JSON.stringify(bookmarks));
   }, [bookmarks, isMounted, isAppContextReady]);
 
-  useEffect(() => {
-    if (!isMounted || !isAppContextReady) return;
-    localStorage.setItem(getStorageKey(USER_TIER_STORAGE_KEY_PREFIX), userTier);
-  }, [userTier, isMounted, isAppContextReady]);
+  // useEffect(() => { // Removed userTier saving
+  //   if (!isMounted || !isAppContextReady) return;
+  //   localStorage.setItem(getStorageKey(USER_TIER_STORAGE_KEY_PREFIX), userTier);
+  // }, [userTier, isMounted, isAppContextReady]);
 
   useEffect(() => {
     if (!isMounted || !isAppContextReady) return;
@@ -211,14 +205,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       currentStreak,
       bookmarks,
       unlockedProTips,
-      userTier,
-      // user: null, // No user object anymore
+      // userTier: 'free', // Removed userTier dependency, effectively always 'free' for this check
     };
 
     let newAchievementsUnlocked = false;
     const updatedAchievements = achievements.map(ach => {
       if (!ach.isUnlocked && ach.criteria && typeof ach.criteria === 'function') {
-        if (ach.criteria(appContextSnapshot)) {
+        if (ach.criteria(appContextSnapshot)) { // Pass snapshot without userTier
           const IconComponent = LucideIcons[ach.iconName] || LucideIcons.Award;
           toast({
             title: (
@@ -239,13 +232,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     if (newAchievementsUnlocked) {
       setAchievements(updatedAchievements);
     }
-  }, [isMounted, achievements, bookmarks, currentStreak, unlockedProTips, userTier, toast, isAppContextReady]);
+  }, [isMounted, achievements, bookmarks, currentStreak, unlockedProTips, toast, isAppContextReady]);
 
   useEffect(() => {
     if (isMounted && isAppContextReady) {
       checkAndUnlockAchievements();
     }
-  }, [isMounted, bookmarks.length, unlockedProTips.size, currentStreak, userTier, checkAndUnlockAchievements, isAppContextReady]);
+  // }, [isMounted, bookmarks.length, unlockedProTips.size, currentStreak, userTier, checkAndUnlockAchievements, isAppContextReady]); // Removed userTier
+  }, [isMounted, bookmarks.length, unlockedProTips.size, currentStreak, checkAndUnlockAchievements, isAppContextReady]);
 
 
   const toggleTheme = useCallback(() => setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light')), []);
@@ -262,21 +256,22 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return bookmarks.includes(id);
   }, [bookmarks]);
 
-  const setUserTier = useCallback((tier: UserTier) => {
-    setUserTierState(tier);
-    setTimeout(() => checkAndUnlockAchievements(), 0);
-  }, [checkAndUnlockAchievements]);
+  // const setUserTier = useCallback((tier: UserTier) => { // Removed
+  //   setUserTierState(tier);
+  //   setTimeout(() => checkAndUnlockAchievements(), 0);
+  // }, [checkAndUnlockAchievements]);
 
   const isProTipUnlocked = useCallback((id: string) => {
-    return userTier === 'premium' || unlockedProTips.has(id);
-  }, [userTier, unlockedProTips]);
+    // return userTier === 'premium' || unlockedProTips.has(id); // Removed userTier check
+    return unlockedProTips.has(id);
+  }, [unlockedProTips]);
 
   const unlockProTipWithToken = useCallback((id: string): boolean => {
-    if (userTier === 'premium') {
-      setUnlockedProTips(prev => new Set(prev).add(id));
-      setTimeout(() => checkAndUnlockAchievements(), 0);
-      return true;
-    }
+    // if (userTier === 'premium') { // Removed userTier check
+    //   setUnlockedProTips(prev => new Set(prev).add(id));
+    //   setTimeout(() => checkAndUnlockAchievements(), 0);
+    //   return true;
+    // }
     if (proTipUnlockTokens > 0) {
       setProTipUnlockTokens(prev => prev - 1);
       setUnlockedProTips(prev => new Set(prev).add(id));
@@ -284,7 +279,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       return true;
     }
     return false;
-  }, [proTipUnlockTokens, userTier, checkAndUnlockAchievements]);
+  }, [proTipUnlockTokens, checkAndUnlockAchievements]);
 
   const getYesterdayDateString = () => {
     const yesterday = new Date();
@@ -304,7 +299,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const today = new Date().toISOString().split('T')[0];
     const yesterday = getYesterdayDateString();
 
-    let baseTokensAwarded = userTier === 'premium' ? DAILY_REWARD_PREMIUM : DAILY_REWARD_FREE;
+    let baseTokensAwarded = DAILY_REWARD_TOKENS; // Use single reward amount
     let bonusFromStreak = 0;
     let newStreakCount = currentStreak;
 
@@ -334,7 +329,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setTimeout(() => checkAndUnlockAchievements(), 0);
 
     return { success: true, tokensAwarded: baseTokensAwarded, bonusTokens: bonusFromStreak, newStreak: newStreakCount };
-  }, [canClaimDailyReward, userTier, currentStreak, lastStreakDay, toast, checkAndUnlockAchievements]);
+  // }, [canClaimDailyReward, userTier, currentStreak, lastStreakDay, toast, checkAndUnlockAchievements]); // Removed userTier
+  }, [canClaimDailyReward, currentStreak, lastStreakDay, toast, checkAndUnlockAchievements]);
 
   if (!isMounted || !isAppContextReady) {
      return (
@@ -349,7 +345,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     <AppContext.Provider
       value={{
         theme, toggleTheme, bookmarks, addBookmark, removeBookmark, isBookmarked,
-        userTier, setUserTier, proTipUnlockTokens, unlockedProTips, isProTipUnlocked,
+        // userTier, setUserTier, // Removed
+        proTipUnlockTokens, unlockedProTips, isProTipUnlocked,
         unlockProTipWithToken, lastClaimedDate, canClaimDailyReward, claimDailyReward,
         currentStreak, lastStreakDay, achievements, checkAndUnlockAchievements,
         isAppContextReady,

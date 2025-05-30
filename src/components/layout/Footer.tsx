@@ -2,23 +2,23 @@
 "use client";
 
 import Link from 'next/link';
-import { useAppContext } from '@/hooks/useAppContext';
+// import { useAppContext } from '@/hooks/useAppContext'; // useAppContext no longer needed here
 
-function AdBanner() {
-  return (
-    <div className="w-full bg-muted text-muted-foreground text-center py-2 text-sm rounded-md shadow">
-      [Simulated Ad Banner] Your Ad Here!
-    </div>
-  );
-}
+// function AdBanner() { // AdBanner removed
+//   return (
+//     <div className="w-full bg-muted text-muted-foreground text-center py-2 text-sm rounded-md shadow">
+//       [Simulated Ad Banner] Your Ad Here!
+//     </div>
+//   );
+// }
 
 export function Footer() {
-  const { userTier } = useAppContext();
+  // const { userTier } = useAppContext(); // userTier removed
 
   return (
     <footer className="border-t mt-auto">
       <div className="container py-8 px-4 md:px-6 space-y-4">
-        {userTier === 'free' && <AdBanner />}
+        {/* {userTier === 'free' && <AdBanner />} Removed ad banner logic */}
         <div className="flex flex-col md:flex-row items-center justify-between text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} MarkSpark. All rights reserved.</p>
           <div className="flex gap-4 mt-2 md:mt-0">

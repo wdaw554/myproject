@@ -67,13 +67,13 @@ export const INITIAL_ACHIEVEMENTS: Achievement[] = [
     isUnlocked: false,
     toastMessage: 'Achievement Unlocked: Pro Tip Guru! 🧠 You\'re soaking up the knowledge!',
   },
-  {
-    id: 'premium_user_achievement',
-    name: 'Premium Power',
-    description: 'Upgraded to MarkSpark Premium!', // Updated App Name
-    iconName: 'Gem',
-    criteria: (context: Pick<AppContextProps, 'userTier'>) => context.userTier === 'premium',
-    isUnlocked: false,
-    toastMessage: 'Achievement Unlocked: Premium Power! ✨ Welcome to the club!', // Updated App Name
-  }
+  // { // Premium achievement removed
+  //   id: 'premium_user_achievement',
+  //   name: 'Premium Power',
+  //   description: 'Upgraded to MarkSpark Premium!',
+  //   iconName: 'Gem',
+  //   criteria: (context: Pick<AppContextProps, 'userTier'>) => context.userTier === 'premium',
+  //   isUnlocked: false,
+  //   toastMessage: 'Achievement Unlocked: Premium Power! ✨ Welcome to the club!',
+  // }
 ];
