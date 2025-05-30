@@ -6,24 +6,12 @@ import type { CheatSheet } from '@/types';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Bookmark, Lock, Lightbulb, Gem, HelpCircle, CheckCircle, BookOpen, Target as TargetIcon, Brain as BrainIcon, FileText as FileTextIcon, XCircle, CheckCircle2 } from 'lucide-react';
+import { Bookmark, Lightbulb, Gem, HelpCircle, CheckCircle, BookOpen, Target as TargetIcon, Brain as BrainIcon, FileText as FileTextIcon, XCircle, CheckCircle2 } from 'lucide-react'; // Removed Lock
 import { useAppContext } from '@/hooks/useAppContext';
 import { TooltipIcon } from '@/components/shared/TooltipIcon';
 import Image from 'next/image';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from '@/hooks/use-toast';
-// import Link from 'next/link'; // Link import removed as "Go Premium" button is removed
 import React, { useState, useEffect } from 'react';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -38,15 +26,10 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
     addBookmark,
     removeBookmark,
     isBookmarked,
-    // userTier, // Removed
-    isProTipUnlocked,
-    unlockProTipWithToken,
-    proTipUnlockTokens,
     checkAndUnlockAchievements,
     isAppContextReady,
   } = useAppContext();
   const { toast } = useToast();
-  const [isAlertOpen, setIsAlertOpen] = React.useState(false);
   const [quizAnswers, setQuizAnswers] = useState<{ [key: number]: { selectedOption: string | null; submitted: boolean } }>({});
 
   useEffect(() => {
@@ -58,7 +41,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
   }, [sheet.imageUrl, sheet.title, sheet.id]);
 
   const bookmarked = isBookmarked(sheet.id);
-  const effectivelyUnlocked = isProTipUnlocked(sheet.id);
 
   const handleToggleBookmark = () => {
     if (bookmarked) {
@@ -69,32 +51,6 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
       toast({ title: "Bookmarked!", description: `"${sheet.title}" added to your bookmarks.` });
     }
     setTimeout(() => checkAndUnlockAchievements(), 0);
-  };
-
-  const handleUnlockProTipAttempt = () => {
-    // if (userTier === 'premium') { // Removed premium check
-    //   const success = unlockProTipWithToken(sheet.id);
-    //   if (success) {
-    //     toast({ title: "Pro Tip Unlocked!", description: "Premium members have all tips unlocked." });
-    //     setTimeout(() => checkAndUnlockAchievements(), 0);
-    //   }
-    //   setIsAlertOpen(false);
-    //   return;
-    // }
-
-    if (proTipUnlockTokens > 0) {
-      const success = unlockProTipWithToken(sheet.id);
-      if (success) {
-        toast({ title: "Pro Tip Unlocked!", description: `You used 1 token. Remaining: ${proTipUnlockTokens -1}` }); // -1 from current tokens for display
-        setTimeout(() => checkAndUnlockAchievements(), 0);
-      } else {
-        // This case should ideally not happen if proTipUnlockTokens > 0, but good for robustness
-        toast({ title: "Unlock Failed", description: "Something went wrong.", variant: "destructive" });
-      }
-    } else {
-      toast({ title: "No Tokens Left", description: "Claim your daily reward to get more tokens!", variant: "destructive" });
-    }
-    setIsAlertOpen(false);
   };
 
   const firstTag = sheet.tags?.[0]?.split(' ')[0].toLowerCase() || 'marketing';
@@ -305,48 +261,8 @@ export function CheatSheetCard({ sheet }: CheatSheetCardProps) {
               <h4 className="text-sm font-semibold text-accent-foreground flex items-center gap-2">
                 <Lightbulb className="h-4 w-4 text-yellow-500" /> Pro Tip
               </h4>
-              {!effectivelyUnlocked && ( // Removed userTier check
-                 <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="outline" size="sm" className="text-xs h-7">
-                      <Lock className="h-3 w-3 mr-1" /> Unlock ({proTipUnlockTokens} <Gem className="ml-1 h-3 w-3" />)
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        {proTipUnlockTokens > 0 ? "Unlock Pro Tip?" : "Out of Tokens!"}
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        {proTipUnlockTokens > 0
-                          ? `Use 1 Pro Tip Token to unlock this insight? You have ${proTipUnlockTokens} token(s) remaining.`
-                          : "You've run out of Pro Tip Tokens for today. Claim your daily reward to get more tokens!"}
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      {proTipUnlockTokens > 0 ? (
-                        <AlertDialogAction onClick={handleUnlockProTipAttempt} className="bg-primary hover:bg-primary/90">
-                          Use 1 Token <Gem className="ml-2 h-3 w-3" />
-                        </AlertDialogAction>
-                      ) : (
-                        // Removed "Go Premium" button, user can only cancel or get more tokens via daily reward
-                        <AlertDialogAction onClick={() => setIsAlertOpen(false)} className="bg-primary hover:bg-primary/90">
-                          OK
-                        </AlertDialogAction>
-                      )}
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              )}
             </div>
-            {effectivelyUnlocked ? (
-              <p className="text-xs text-accent-foreground/90">{sheet.proTip}</p>
-            ) : (
-              <p className="text-xs text-muted-foreground italic">
-                Unlock with a token to view this tip.
-              </p>
-            )}
+            <p className="text-xs text-accent-foreground/90">{sheet.proTip}</p>
           </div>
         )}
         {sheet.tags && sheet.tags.length > 0 && (

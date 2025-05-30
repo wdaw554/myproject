@@ -28,8 +28,8 @@ export interface CheatSheet {
   content: string; // Main content, can be simple text or markdown
   category: Category;
   tags: string[]; // For keyword search
-  proTip?: string; // Unlockable pro tip
-  isProTipUnlocked?: boolean; // Tracks if pro tip is unlocked for the session/user
+  proTip?: string; // Pro tip, now always visible if present
+  // isProTipUnlocked removed as tips are always visible
   interactiveElements?: InteractiveElement[];
   isBookmarked?: boolean;
   imageUrl?: string; // Optional field for custom image URLs
@@ -38,9 +38,6 @@ export interface CheatSheet {
   quiz?: QuizQuestion[];
   caseStudies?: CaseStudy[];
 }
-
-// UserTier removed as premium features are being removed.
-// export type UserTier = 'free' | 'premium';
 
 export interface Achievement {
   id: string;
